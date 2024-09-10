@@ -51,7 +51,7 @@ public class InventoryItem : MonoBehaviour
     {
         Vector2 canvasPosition = Camera.main.WorldToScreenPoint(worldPosition);
 
-        _rectTransform.SetParent(UI.container);
+        _rectTransform.SetParent(UI.main);
         _rectTransform.DOScale(0f, moveDuration).SetEase(Ease.InQuad);
         _rectTransform.DOMove(canvasPosition, moveDuration).SetEase(Ease.InQuad)
             .onComplete += () => onCompleted?.Invoke();

@@ -4,10 +4,10 @@ using VG;
 
 public class BuildingCreator : MonoBehaviour
 {
-
+    [SerializeField] private Grid _grid;
     private List<Building> _buildings;
 
-
+    public const float offsetY = 0.35f;
 
 
     private void Awake()
@@ -27,13 +27,9 @@ public class BuildingCreator : MonoBehaviour
     private void OnBuildingUpgrade(int buildingIndex)
     {
         var buildingData = Saves.GetBuildingData(buildingIndex);
-        var newBuildingPrefab = GameResources.GetBuildingPrefab
-            (buildingData.buildingType, buildingData.level);
 
         Destroy(_buildings[buildingIndex].gameObject);
-        
-        var newBuilding = Instantiate(newBuildingPrefab, buildingData.position, Quaternion.identity);
-        _buildings[buildingIndex] = newBuilding;
+        _buildings[buildingIndex] = InstantiateBuilding(buildingData);
     }
 
 
@@ -45,18 +41,25 @@ public class BuildingCreator : MonoBehaviour
         {
             if (Saves.String[Key_Save.building_data(i)].Value == string.Empty)
                 continue;
-
-            var buildingData = Saves.GetBuildingData(i);
-
-            Building buildingPrefab =
-                GameResources.GetBuildingPrefab(buildingData.buildingType, buildingData.level);
-
-            var building = Instantiate(buildingPrefab, buildingData.position, Quaternion.identity);
-            building.index = i;
-
+            var building = InstantiateBuilding(Saves.GetBuildingData(i));
             _buildings.Add(building);
         }
     }
+
+
+    private Building InstantiateBuilding(BuildingData buildingData)
+    {
+        Building buildingPrefab =
+                GameResources.GetBuildingPrefab(buildingData.buildingType, buildingData.level);
+
+        Vector3 position = _grid.GetCellCenterLocal(buildingData.gridPosition);
+        position.y = offsetY;
+        var buildingInstance = Instantiate(buildingPrefab, position, Quaternion.identity);
+        buildingInstance.index = buildingData.index;
+        return buildingInstance;
+    }
+
+
 
 
     

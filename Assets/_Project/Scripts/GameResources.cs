@@ -30,5 +30,12 @@ public static class GameResources
         => Resources.Load<Sprite>($"Sprites/ItemIcons/{itemType}");
 
 
+    public static GameObject GetPanel(PanelType panelType)
+        => Resources.Load<GameObject>($"Prefabs/Panels/{panelType}");
+
+    public static TecnhologyConfig GetTecnhologyConfig(TechnologyType technologyType)
+        => Resources.Load<TecnhologyConfig>($"Configs/Technologies/{technologyType}");
+
+
 
 }

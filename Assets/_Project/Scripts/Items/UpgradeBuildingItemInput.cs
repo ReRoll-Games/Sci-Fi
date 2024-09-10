@@ -53,9 +53,9 @@ public class UpgradeBuildingItemInput : MonoBehaviour
             if (itemPack.quantity > 0 && Inventory.HasItem(itemPack.itemType))
             {
                 _itemDropping = true;
-                Inventory.Drop(ItemType.Coal, _dropPosition.position, onDropped: () =>
+                Inventory.Drop(itemPack.itemType, _dropPosition.position, onDropped: () =>
                 {
-                    Saves.DropItemToBuildingUpgrade(ItemType.Coal, _building.index);
+                    Saves.DropItemToBuildingUpgrade(itemPack.itemType, _building.index);
                     _itemDropping = false;
                 });
                 return;

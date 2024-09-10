@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour
 
     public static void Take(ItemType itemType, Vector3 takePosition)
     {
-        var item = Instantiate(instance._inventoryItemPrefab, UI.container);
+        var item = Instantiate(instance._inventoryItemPrefab, UI.main);
         item.GetComponent<RectTransform>().position = 
             Camera.main.WorldToScreenPoint(takePosition);
 

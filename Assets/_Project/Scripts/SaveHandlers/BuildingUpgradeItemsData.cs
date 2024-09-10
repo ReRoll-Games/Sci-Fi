@@ -83,6 +83,7 @@ namespace VG
             {
                 var buildingData = GetBuildingData(buildingIndex);
                 buildingData.level++;
+                buildingData.state = BuildingState.Active;
                 String[Key_Save.building_process_data(buildingIndex)].Value = string.Empty;
                 SetBuildingData(buildingData);
                 GameEvents.BuildingUpgrade(buildingIndex);

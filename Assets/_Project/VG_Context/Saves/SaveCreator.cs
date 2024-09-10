@@ -21,11 +21,13 @@ namespace VG
             new ItemBool(Key_Save.ads_enabled, true);
             new ItemString(Key_Save.last_time, DateTime.Now.ToString());
 
+            new ItemInt(Key_Save.techno_coins, 500);
+
             new ItemString(Key_Save.building_data(0), new BuildingData
             {
                 buildingType = BuildingType.Center,
                 level = 0,
-                position = new UnityEngine.Vector3(3f, 0f, 3f),
+                gridPosition = new UnityEngine.Vector3Int(1, 1, 0),
                 state = BuildingState.Upgrade
             }.ToDataString());
 
@@ -34,6 +36,7 @@ namespace VG
                 new ItemPack{ itemType = ItemType.Coal, quantity = 5 },
             }.ToDataString());
 
+            new ItemString(Key_Save.technologies_data, string.Empty);
 
         }
 
