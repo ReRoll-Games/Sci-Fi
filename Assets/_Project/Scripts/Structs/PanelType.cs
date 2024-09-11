@@ -2,5 +2,6 @@
 public enum PanelType
 {
     TechnologyTree,
-    BuildingCatalog
+    BuildingCatalog,
+    FurnaceRecipes
 }

@@ -6,13 +6,13 @@ public class BasementCreator : MonoBehaviour
 {
     [SerializeField] private Grid _grid;
     [SerializeField] private GameObject _basementPrefab;
+    [SerializeField] private BasementConfig _basementConfig;
 
-
-    private List<Vector2Int> _basementInstances = new List<Vector2Int>();
-
+    public static List<Vector2Int> basementPositions { get; private set; }
 
     private void Awake()
     {
+        basementPositions = new List<Vector2Int>();
         Saves.String[Key_Save.technologies_data].onChanged += UpdateBasement;
     }
 
@@ -21,29 +21,22 @@ public class BasementCreator : MonoBehaviour
         Saves.String[Key_Save.technologies_data].onChanged -= UpdateBasement;
     }
 
+    private void Start() => UpdateBasement();
 
 
     private void UpdateBasement()
     {
-        throw new System.NotImplementedException();
+        int basementLevel = Saves.GetTechnologyLevel(TechnologyType.Basement);
+
+        foreach (var basementPosition in _basementConfig.GetBasementPositions(basementLevel))
+        {
+            if (basementPositions.Contains(basementPosition) == false)
+            {
+                Vector3 position = _grid.GetCellCenterLocal
+                    (new Vector3Int(basementPosition.x, basementPosition.y, 0));
+                Instantiate(_basementPrefab, position, Quaternion.Euler(0f, 30f, 0f));
+                basementPositions.Add(basementPosition);
+            }
+        }
     }
-
-
-    private void Start()
-    {
-        Vector3 position = _grid.GetCellCenterLocal(new Vector3Int(1, 1, 0));
-        Instantiate(_basementPrefab, position, Quaternion.Euler(0f, 30f, 0f));
-    }
-
-
-    private int GetBasementLevel()
-    {
-        if (Saves.GetTechnologyState(TechnologyType.Basement) == TechnologyState.Done)
-            return 1;
-
-        return 0;
-    }
-
-
-
 }

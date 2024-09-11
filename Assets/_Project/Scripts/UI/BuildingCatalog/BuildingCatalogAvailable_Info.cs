@@ -17,8 +17,7 @@ public class BuildingCatalogAvailable_Info : Info
     
     protected override void UpdateValue()
     {
-        bool catalogAvailable = Saves
-            .GetTechnologyState(TechnologyType.Furnace) == TechnologyState.Done;
+        bool catalogAvailable = Saves.GetTechnologyLevel(TechnologyType.Furnace) > 0;
         
         _openBuildingCatalogButton.SetActive(catalogAvailable);
     }

@@ -11,9 +11,6 @@ public class BuildingUpgradeConfig : ScriptableObject
         public List<ItemPack> itemPacks;
     }
 
-
-    [field: SerializeField] public BuildingType buildingType { get; private set; }
-    [Space(10)]
     [SerializeField] private List<ItemsForUpgrade> _itemsForUpgrade;
 
 

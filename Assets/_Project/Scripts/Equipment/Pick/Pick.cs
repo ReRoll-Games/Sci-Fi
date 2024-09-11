@@ -75,7 +75,7 @@ public class Pick : MonoBehaviour
         if (_extractTimeLeft < 0f)
         {
             _extractTimeLeft = _extractTime;
-            Inventory.Take(ItemType.Coal, _targetOreSource.transform.position);
+            Inventory.Take(_targetOreSource.itemType, _targetOreSource.transform.position);
         }
 
     }

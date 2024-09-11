@@ -2,7 +2,7 @@ using UnityEngine;
 using VG;
 
 
-public class GetTechnology_Button : ButtonHandler
+public class BuyTechnology_Button : ButtonHandler
 {
     [SerializeField] private TechnologyNode_Info _technologyNodeInfo;
 
@@ -13,7 +13,7 @@ public class GetTechnology_Button : ButtonHandler
 
         if (Saves.Int[Key_Save.techno_coins].Value >= tecnhologyConfig.price)
         {
-            Saves.SetTechnologyDone(_technologyNodeInfo.technologyType);
+            Saves.SetTechnologyLevel(_technologyNodeInfo.technologyType, _technologyNodeInfo.level);
             Saves.Int[Key_Save.techno_coins].Value -= tecnhologyConfig.price;
         }
 

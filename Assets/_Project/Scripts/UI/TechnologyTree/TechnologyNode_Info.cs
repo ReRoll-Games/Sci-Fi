@@ -6,6 +6,7 @@ using VG;
 public class TechnologyNode_Info : Info
 {
     [field: SerializeField] public TechnologyType technologyType { get; private set; }
+    [field: SerializeField] public int level { get; private set; }
     [SerializeField] private Button _getButton;
     [SerializeField] private TextMeshProUGUI _priceText;
 
@@ -23,11 +24,9 @@ public class TechnologyNode_Info : Info
     
     protected override void UpdateValue()
     {
-        var technologyState = Saves.GetTechnologyState(technologyType);
+        var level = Saves.GetTechnologyLevel(technologyType);
 
-        if (technologyState == TechnologyState.Done)
-            _getButton.interactable = false;
-
+        if (level >= this.level) _getButton.interactable = false;
         else _getButton.interactable = true;
 
 

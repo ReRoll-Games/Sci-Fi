@@ -15,6 +15,7 @@ public class Building : MonoBehaviour
     private bool _playerInsideArea = false;
 
 
+
     private void OnEnable()
     {
         _areaTrigger.onEnter += OnAreaEnter;

@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ab91caa4d5435439d3d8183247768e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panel: {fileID: 8056900473778690939}
+  _panelType: 1
 --- !u!1 &2843531711102978563
 GameObject:
   m_ObjectHideFlags: 0

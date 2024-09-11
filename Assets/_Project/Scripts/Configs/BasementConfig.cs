@@ -14,10 +14,8 @@ public class BasementConfig : ScriptableObject
     [SerializeField] private List<BasementPlace> _placesPerLevel;
 
 
-    public List<Vector3Int> GetBasementPositions(int basementLevel)
-    {
-        return null;
-    }
+    public List<Vector2Int> GetBasementPositions(int basementLevel)
+        => _placesPerLevel[basementLevel].places;
 
 
 }

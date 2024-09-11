@@ -4,6 +4,11 @@ using VG;
 
 public class BuildingCreator : MonoBehaviour
 {
+    private static BuildingCreator instance;
+
+    public static List<Vector2Int> buildingPositions { get; private set; }
+
+
     [SerializeField] private Grid _grid;
     private List<Building> _buildings;
 
@@ -12,6 +17,8 @@ public class BuildingCreator : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+        buildingPositions = new List<Vector2Int>();
         GameEvents.onBuildingUpgrade += OnBuildingUpgrade;
     }
 
@@ -28,11 +35,12 @@ public class BuildingCreator : MonoBehaviour
     {
         var buildingData = Saves.GetBuildingData(buildingIndex);
 
+        print(buildingIndex);
         Destroy(_buildings[buildingIndex].gameObject);
         _buildings[buildingIndex] = InstantiateBuilding(buildingData);
     }
 
-
+     
     private void CreateBuildings()
     {
         _buildings = new List<Building>();
@@ -47,15 +55,16 @@ public class BuildingCreator : MonoBehaviour
     }
 
 
-    private Building InstantiateBuilding(BuildingData buildingData)
+    public static Building InstantiateBuilding(BuildingData buildingData)
     {
         Building buildingPrefab =
                 GameResources.GetBuildingPrefab(buildingData.buildingType, buildingData.level);
 
-        Vector3 position = _grid.GetCellCenterLocal(buildingData.gridPosition);
+        Vector3 position = instance._grid.GetCellCenterLocal(buildingData.gridPosition);
         position.y = offsetY;
         var buildingInstance = Instantiate(buildingPrefab, position, Quaternion.identity);
         buildingInstance.index = buildingData.index;
+        buildingPositions.Add(new Vector2Int(buildingData.gridPosition.x, buildingData.gridPosition.y));
         return buildingInstance;
     }
 

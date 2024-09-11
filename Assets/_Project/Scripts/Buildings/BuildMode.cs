@@ -10,7 +10,8 @@ public class BuildMode : MonoBehaviour
 
 
     private bool _modeEnabled = false;
-    private Building _currentBuilding;
+    private GameObject _currentBuildModeUnit;
+    private BuildingType _currentBuildingType;
 
 
     private void Awake()
@@ -29,38 +30,49 @@ public class BuildMode : MonoBehaviour
     private void HandleBuildMode()
     {
         Vector3 position = instance.GetGridCenterPosition(instance._playerTransform.position);
-        instance._currentBuilding.transform.position = position;
+        instance._currentBuildModeUnit.transform.position = position;
     }
 
 
     public static void Enable(BuildingType buildingType)
     {
-        var buildingPrefab = GameResources.GetBuildingPrefab(buildingType, 0);
+        instance._currentBuildingType = buildingType;
+        var buildModePrefab = GameResources.GetBuildModePrefab(buildingType);
         Vector3 position = instance.GetGridCenterPosition(instance._playerTransform.position);
-        instance._currentBuilding = Instantiate(buildingPrefab, position, Quaternion.identity);
+        instance._currentBuildModeUnit = Instantiate(buildModePrefab, position, Quaternion.identity);
+        instance._modeEnabled = true;
     }
 
     public static void ApplyBuild()
     {
-        Saves.SetBuildingData(new BuildingData
+        int buildingIndex = Saves.GetBuildingQuantity();
+
+        var buildingData = new BuildingData
         {
-            buildingType = instance._currentBuilding.buildingType,
-            index = Saves.GetBuildingQuantity(),
+            buildingType = instance._currentBuildingType,
+            index = buildingIndex,
             level = 0,
             state = BuildingState.Upgrade,
-            gridPosition = instance._grid.WorldToCell(instance._currentBuilding.transform.position)
-        });
+            gridPosition = instance._grid.WorldToCell(instance._currentBuildModeUnit.transform.position)
+        };
 
-        instance._modeEnabled = false;
+        Saves.SetBuildingData(buildingData);
+        BuildingCreator.InstantiateBuilding(buildingData);
+
+        var needItems = 
+            GameResources.GetBuildingUpgradeConfig(instance._currentBuildingType);
+
+        Saves.SetItemsNeedForUpgradeBuilding(buildingIndex, needItems.GetItemsForUpgrade(0));
+
+        Disable();
     }
 
 
     public static void Disable()
     {
-        Destroy(instance._currentBuilding.gameObject);
+        Destroy(instance._currentBuildModeUnit.gameObject);
         instance._modeEnabled = false;
     }
-
 
 
     private Vector3 GetGridCenterPosition(Vector3 position)
@@ -69,6 +81,18 @@ public class BuildMode : MonoBehaviour
         Vector3 centerPosition = _grid.GetCellCenterWorld(gridPosition);
         centerPosition.y = BuildingCreator.offsetY;
         return centerPosition;
+    }
+
+
+    private void MoveBuilding(Vector2Int gridPosition)
+    {
+        /*
+        if (BasementCreator.basementPositions.Contains(gridPosition)
+            && BuildingCreator.buildingPositions.Contains(gridPosition) == false) 
+            _currentBuilding.gameObject.SetActive(false);
+
+        else
+        */
     }
 
 

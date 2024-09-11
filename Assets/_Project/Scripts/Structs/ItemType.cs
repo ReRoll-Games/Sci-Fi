@@ -2,5 +2,7 @@
 
 public enum ItemType
 {
-    Coal
+    Coal,
+    Iron,
+    IronIngot
 }

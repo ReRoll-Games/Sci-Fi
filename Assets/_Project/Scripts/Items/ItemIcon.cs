@@ -18,6 +18,12 @@ public class ItemIcon : MonoBehaviour
     public void SetQuantity(int quantity) => _quantityText.text = quantity.ToString();
     public void SetQuantity(int quantity, int max) => _quantityText.text = $"{quantity}/{max}";
 
+    public void SetItemPack(ItemPack itemPack)
+    {
+        _iconImage.sprite = GameResources.GetItemIconSprite(itemPack.itemType);
+        _quantityText.text = itemPack.quantity.ToString();
+    }
+
 
     public void SpringAnimation()
     {

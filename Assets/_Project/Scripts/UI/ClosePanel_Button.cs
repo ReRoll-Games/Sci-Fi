@@ -4,11 +4,8 @@ using VG;
 
 public class ClosePanel_Button : ButtonHandler
 {
-    [SerializeField] private GameObject _panel;
+    [SerializeField] private PanelType _panelType;
 
-    protected override void OnClick()
-    {
-        Destroy(_panel);
-    }
+    protected override void OnClick() => UI.ClosePanel(_panelType);
     
 }
