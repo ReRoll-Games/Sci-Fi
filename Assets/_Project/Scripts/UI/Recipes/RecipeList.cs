@@ -9,8 +9,10 @@ public class RecipeList : MonoBehaviour
 
     private void Start()
     {
-        foreach (var recipe in _recipesConfig.recipes)
-            Instantiate(_recipeWidgetPrefab, _recipeContainer).SetRecipe(recipe);
+        for (int i = 0; i < _recipesConfig.recipes.Count; i++)
+            Instantiate(_recipeWidgetPrefab, _recipeContainer)
+                .SetRecipe(_recipesConfig.recipes[i], i);
+            
     }
 
 

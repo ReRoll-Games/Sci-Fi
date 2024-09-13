@@ -12,7 +12,7 @@ public struct RecipeProcess
     {
         string dataString = string.Empty;
 
-        dataString += recipeIndex.ToString();
+        dataString += $"{recipeIndex}_";
 
         for (int i = 0; i < inputItems.Count; i++)
             dataString += $"{inputItems[i].quantity}_";
@@ -39,7 +39,7 @@ namespace VG
         public static RecipeProcess GetRecipeProcess(int buildingIndex)
         {
             var buildingData = GetBuildingData(buildingIndex);
-            RecipesConfig recipeConfig = GameResources.GetRecipe(buildingData.buildingType);
+            RecipesConfig recipeConfig = GameResources.GetRecipesConfig(buildingData.buildingType);
 
             string[] dataArray = String[Key_Save.building_process_data(buildingIndex)]
                 .Value.Split('_');

@@ -4,7 +4,7 @@ using UnityEngine;
 public static class GameResources
 {
 
-    public static RecipesConfig GetRecipe(BuildingType buildingType)
+    public static RecipesConfig GetRecipesConfig(BuildingType buildingType)
         => Resources.Load<RecipesConfig>($"Configs/Recipes/{buildingType}");
 
     public static Building GetBuildingPrefab(BuildingType buildingType, int level)
@@ -13,11 +13,6 @@ public static class GameResources
 
     public static GameObject GetBuildModePrefab(BuildingType buildingType)
         => Resources.Load<GameObject>($"Prefabs/BuildMode/{buildingType}");
-
-
-    public static ItemIcon GetItemIconPrefab()
-        => Resources.Load<GameObject>($"Prefabs/UI/ItemIcon")
-        .GetComponent<ItemIcon>();
 
 
     public static BuildingUpgradeConfig GetBuildingUpgradeConfig(BuildingType buildingType)

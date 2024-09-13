@@ -35,9 +35,8 @@ public class BuildingCreator : MonoBehaviour
     {
         var buildingData = Saves.GetBuildingData(buildingIndex);
 
-        print(buildingIndex);
         Destroy(_buildings[buildingIndex].gameObject);
-        _buildings[buildingIndex] = InstantiateBuilding(buildingData);
+        InstantiateBuilding(buildingData);
     }
 
      
@@ -49,8 +48,8 @@ public class BuildingCreator : MonoBehaviour
         {
             if (Saves.String[Key_Save.building_data(i)].Value == string.Empty)
                 continue;
-            var building = InstantiateBuilding(Saves.GetBuildingData(i));
-            _buildings.Add(building);
+
+            InstantiateBuilding(Saves.GetBuildingData(i));
         }
     }
 
@@ -65,6 +64,13 @@ public class BuildingCreator : MonoBehaviour
         var buildingInstance = Instantiate(buildingPrefab, position, Quaternion.identity);
         buildingInstance.index = buildingData.index;
         buildingPositions.Add(new Vector2Int(buildingData.gridPosition.x, buildingData.gridPosition.y));
+
+        if (buildingData.index < instance._buildings.Count)
+            instance._buildings[buildingData.index] = buildingInstance;
+
+        else instance._buildings.Add(buildingInstance);
+
+
         return buildingInstance;
     }
 

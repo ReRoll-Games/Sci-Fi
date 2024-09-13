@@ -13,14 +13,14 @@ public class Window : MonoBehaviour
 
 
     private Building _building;
-    public Building building => _building == null ? Building.currentBuilding : _building;
+    public Building building => _building == null ? Building.interactableBuilding : _building;
 
 
 
     private void Start()
     {
         transform.localScale = Vector3.zero;
-        _building = Building.currentBuilding;
+        _building = Building.interactableBuilding;
     }
 
 

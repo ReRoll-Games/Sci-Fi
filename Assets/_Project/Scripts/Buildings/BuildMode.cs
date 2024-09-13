@@ -45,7 +45,7 @@ public class BuildMode : MonoBehaviour
 
     public static void ApplyBuild()
     {
-        int buildingIndex = Saves.GetBuildingQuantity();
+        int buildingIndex = Saves.GetBuildingQuantity() - 1;
 
         var buildingData = new BuildingData
         {

@@ -2346,6 +2346,8 @@ MonoBehaviour:
   _handlers:
   - _key: one_second
     _timeInterval: 1
+  - _key: item_input_cicle
+    _timeInterval: 0.15
 --- !u!224 &2625583419963208701
 RectTransform:
   m_ObjectHideFlags: 0

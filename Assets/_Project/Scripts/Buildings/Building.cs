@@ -4,7 +4,7 @@ using VG;
 
 public class Building : MonoBehaviour
 {
-    public static Building currentBuilding { get; private set; }
+    public static Building interactableBuilding { get; private set; }
 
     [field: SerializeField] public BuildingType buildingType { get; private set; }
     public int index { get; set; }
@@ -13,6 +13,8 @@ public class Building : MonoBehaviour
 
     private Window _currentWindow;
     private bool _playerInsideArea = false;
+
+    private const float windowRotationX = 50f;
 
 
 
@@ -41,10 +43,12 @@ public class Building : MonoBehaviour
         if (_playerInsideArea) return;
 
         _playerInsideArea = true;
-        currentBuilding = this;
+        interactableBuilding = this;
 
         var window = GetWindowPrefab();
         _currentWindow = Instantiate(window, transform);
+        _currentWindow.transform.rotation = Quaternion.Euler(windowRotationX, 0, 0);
+
         _currentWindow.Open();
     }
 

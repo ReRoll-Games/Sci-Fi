@@ -6,4 +6,9 @@ public class RecipesConfig : ScriptableObject
 {
     [field: SerializeField] public List<Recipe> recipes {  get; private set; }
 
+
+    public Recipe GetRecipe(int index) => recipes[index];
+
+
+
 }
