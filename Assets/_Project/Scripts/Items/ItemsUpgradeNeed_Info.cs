@@ -10,14 +10,14 @@ public class ItemsUpgradeNeed_Info : Info
 
     protected override void Subscribe() 
     {
-        Saves.String[Key_Save.building_process_data(_window.building.index)]
-            .onChanged += UpdateValue;
+        Saves.String[Key_Save.building_process_data(_window.building.index)].onChanged += UpdateValue;
+        GameEvents.onInventoryChanged += UpdateValue;
     }
 
     protected override void Unsubscribe()
     {
-        Saves.String[Key_Save.building_process_data(_window.building.index)]
-            .onChanged -= UpdateValue;
+        Saves.String[Key_Save.building_process_data(_window.building.index)].onChanged -= UpdateValue;
+        GameEvents.onInventoryChanged -= UpdateValue;
     }
     
     protected override void UpdateValue()
@@ -27,7 +27,11 @@ public class ItemsUpgradeNeed_Info : Info
         for (int i = 0; i < itemsNeed.Count; i++)
         {
             _itemIcons[i].gameObject.SetActive(true);
-            _itemIcons[i].SetItemPack(itemsNeed[i]);
+            _itemIcons[i].SetItemType(itemsNeed[i].itemType);
+
+            int hasItems = Saves.Int[Key_Save.item_quantity(itemsNeed[i].itemType)].Value;
+            _itemIcons[i].SetQuantity(hasItems, itemsNeed[i].quantity);
+
         }
         for (int i = itemsNeed.Count; i < _itemIcons.Count; i++)
             _itemIcons[i].gameObject.SetActive(false);

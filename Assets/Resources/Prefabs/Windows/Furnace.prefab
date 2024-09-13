@@ -210,7 +210,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 597222004535157215}
-  - component: {fileID: 5463964875960756508}
   m_Layer: 0
   m_Name: RecipeProcess
   m_TagString: Untagged
@@ -239,26 +238,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5463964875960756508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900999227800990921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d155e07fa926cc4b928beb0514c3be3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _window: {fileID: 4309344986119353758}
-  _inputItemIcons:
-  - {fileID: 7382138500629768820}
-  - {fileID: 3880962556295194964}
-  - {fileID: 7639660794239455623}
-  _outputItemIcon: {fileID: 4354833819296383191}
-  _progressBar: {fileID: 1922484195507035099}
-  _timeText: {fileID: 1569848304598741886}
 --- !u!1 &2383264014600380590
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,7 +707,7 @@ GameObject:
   - component: {fileID: 1344754023079900489}
   - component: {fileID: 4309344986119353758}
   - component: {fileID: 1422460029186476176}
-  - component: {fileID: 6899683742583946042}
+  - component: {fileID: 5573142078758529900}
   m_Layer: 0
   m_Name: Furnace
   m_TagString: Untagged
@@ -813,7 +792,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6899683742583946042
+--- !u!114 &5573142078758529900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -822,12 +801,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5888439031745329445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 068b7983294185540ad6acea36471d5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d155e07fa926cc4b928beb0514c3be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _window: {fileID: 4309344986119353758}
-  _processOff: {fileID: 6542420029420823855}
-  _processOn: {fileID: 1900999227800990921}
+  _processOff: {fileID: 1900999227800990921}
+  _processOn: {fileID: 6542420029420823855}
+  _inputItemIcons:
+  - {fileID: 7382138500629768820}
+  - {fileID: 3880962556295194964}
+  - {fileID: 7639660794239455623}
+  _outputItemIcon: {fileID: 4354833819296383191}
+  _progressBar: {fileID: 1922484195507035099}
+  _timeText: {fileID: 1569848304598741886}
 --- !u!1 &6542420029420823855
 GameObject:
   m_ObjectHideFlags: 0

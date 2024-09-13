@@ -23,6 +23,10 @@ namespace VG
 
             new ItemInt(Key_Save.techno_coins, 500);
 
+            foreach (ItemType itemType in Key_Save.allItemTypes)
+                new ItemInt(Key_Save.item_quantity(itemType), 0);
+
+
 
             for (int i = 0; i < maxBuildingsQuantity; i++)
             {
@@ -48,10 +52,6 @@ namespace VG
                 }
             }
 
-
-            
-
-            
 
             new ItemString(Key_Save.technologies_data, string.Empty);
 

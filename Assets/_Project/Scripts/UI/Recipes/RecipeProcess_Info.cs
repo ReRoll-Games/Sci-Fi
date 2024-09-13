@@ -7,6 +7,10 @@ using TMPro;
 public class RecipeProcess_Info : Info
 {
     [SerializeField] private Window _window;
+    [Space(10)]
+    [SerializeField] private GameObject _processOff;
+    [SerializeField] private GameObject _processOn;
+    [Space(10)]
     [SerializeField] private List<ItemIcon> _inputItemIcons;
     [SerializeField] private ItemIcon _outputItemIcon;
     [SerializeField] private Slider _progressBar;
@@ -24,6 +28,18 @@ public class RecipeProcess_Info : Info
     }
     
     protected override void UpdateValue()
+    {
+        string processData = Saves.String[Key_Save.building_process_data(_window.building.index)].Value;
+
+        bool processOn = processData != string.Empty;
+        _processOff.SetActive(!processOn);
+        _processOn.SetActive(processOn);
+
+        if (processOn) UpdateRecipeProcess();
+    }
+
+
+    private void UpdateRecipeProcess()
     {
         var recipeProcess = Saves.GetRecipeProcess(_window.building.index);
         var recipe = GameResources.GetRecipesConfig
@@ -43,5 +59,7 @@ public class RecipeProcess_Info : Info
         _timeText.text = recipeProcess.timeLeft.ToTimeString();
         _progressBar.value = 1f - recipeProcess.timeLeft / recipe.productionTime;
     }
+
+
     
 }

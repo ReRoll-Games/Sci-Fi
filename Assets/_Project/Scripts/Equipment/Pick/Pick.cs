@@ -75,7 +75,7 @@ public class Pick : MonoBehaviour
         if (_extractTimeLeft < 0f)
         {
             _extractTimeLeft = _extractTime;
-            Inventory.Take(_targetOreSource.itemType, _targetOreSource.transform.position);
+            Saves.Int[Key_Save.item_quantity(_targetOreSource.itemType)].Value++;
         }
 
     }

@@ -3,5 +3,6 @@ public enum PanelType
 {
     TechnologyTree,
     BuildingCatalog,
-    FurnaceRecipes
+    FurnaceRecipes,
+    Inventory
 }
