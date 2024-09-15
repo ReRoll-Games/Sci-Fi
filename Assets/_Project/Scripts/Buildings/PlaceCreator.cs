@@ -2,11 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using VG;
 
-public class BasementCreator : MonoBehaviour
+public class PlaceCreator : MonoBehaviour
 {
     [SerializeField] private Grid _grid;
+    [Header("Basement")]
     [SerializeField] private GameObject _basementPrefab;
     [SerializeField] private BasementConfig _basementConfig;
+    [Header("Mining Positions")]
+    [SerializeField] private MiningPositionsConfig _miningPositionConfig;
+
+
 
     public static List<Vector2Int> basementPositions { get; private set; }
 

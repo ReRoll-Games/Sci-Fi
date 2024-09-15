@@ -40,10 +40,7 @@ namespace VG
                         state = BuildingState.Upgrade
                     }.ToDataString());
 
-                    new ItemString(Key_Save.building_process_data(0), new List<ItemPack>
-                    {
-                        new ItemPack{ itemType = ItemType.Coal, quantity = 5 },
-                    }.ToDataString());
+                    new ItemString(Key_Save.building_process_data(0), string.Empty);
                 }
                 else
                 {

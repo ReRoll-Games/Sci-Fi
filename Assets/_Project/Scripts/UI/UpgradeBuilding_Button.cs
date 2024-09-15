@@ -9,7 +9,10 @@ public class UpgradeBuilding_Button : ButtonHandler
 
     protected override void OnClick()
     {
-        var itemsNeed = Saves.GetItemsNeedForUpgradeBuilding(_window.building.index);
+        var buildingData = Saves.GetBuildingData(_window.building.index);
+        var itemsNeed = GameResources.GetBuildingUpgradeConfig
+            (buildingData.buildingType).GetItemsForUpgrade(buildingData.level);
+
         if (UpgradeAvailable(itemsNeed)) ApplyUpgrade(itemsNeed);
     }
 

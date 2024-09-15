@@ -62,8 +62,6 @@ public class BuildMode : MonoBehaviour
         var needItems = 
             GameResources.GetBuildingUpgradeConfig(instance._currentBuildingType);
 
-        Saves.SetItemsNeedForUpgradeBuilding(buildingIndex, needItems.GetItemsForUpgrade(0));
-
         Disable();
     }
 

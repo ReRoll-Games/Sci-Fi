@@ -1,82 +1,54 @@
-using System;
-using System.Collections.Generic;
-
-public struct RecipeProcess
-{
-    public int recipeIndex;
-    public List<ItemFullness> inputItems;
-    public ItemPack outputItem;
-    public float timeLeft;
-
-    public string ToDataString()
-    {
-        string dataString = string.Empty;
-
-        dataString += $"{recipeIndex}_";
-
-        for (int i = 0; i < inputItems.Count; i++)
-            dataString += $"{inputItems[i].quantity}_";
-
-        dataString += $"{outputItem.quantity}_";
-        dataString += $"{(int)timeLeft}";
-
-        return dataString;
-    }
-}
-
-
 
 
 namespace VG
 {
 
-    public partial class Saves
+    public struct ItemProductionData
     {
-        public static void SetRecipeProcess(int buildingIndex, RecipeProcess recipeProcess)
-            => String[Key_Save.building_process_data(buildingIndex)].Value = recipeProcess.ToDataString();
+        public int recipeIndex;
+        public int timeLeft;
+        public int produced;
 
+        public string ToDataString() => $"{recipeIndex}_{timeLeft}_{produced}";
 
-        public static RecipeProcess GetRecipeProcess(int buildingIndex)
+        public static ItemProductionData Convert(string data)
         {
-            var buildingData = GetBuildingData(buildingIndex);
-            RecipesConfig recipeConfig = GameResources.GetRecipesConfig(buildingData.buildingType);
-
-            string[] dataArray = String[Key_Save.building_process_data(buildingIndex)]
-                .Value.Split('_');
-
-
-            int recipeIndex = int.Parse(dataArray[0]);
-            var recipe = recipeConfig.recipes[recipeIndex];
-
-            var inputItems = new List<ItemFullness>();
-            for (int i = 0; i < recipe.inputItems.Count; i++)
+            string[] splitData = data.Split('_');
+            return new ItemProductionData
             {
-                inputItems.Add(new ItemFullness
-                {
-                    itemType = recipe.inputItems[i].itemType,
-                    quantity = int.Parse(dataArray[i + 1]),
-                    max = recipe.inputItems[i].quantity
-                });
-            }
-
-            var outputItemPack = new ItemPack
-            {
-                quantity = int.Parse(dataArray[dataArray.Length - 2]),
-                itemType = recipe.outputItem
-            };
-
-            float time = int.Parse(dataArray[dataArray.Length - 1]);
-
-            return new RecipeProcess
-            {
-                recipeIndex = recipeIndex,
-                inputItems = inputItems,
-                outputItem = outputItemPack,
-                timeLeft = time,
+                recipeIndex = int.Parse(splitData[0]),
+                timeLeft = int.Parse(splitData[1]),
+                produced = int.Parse(splitData[2])
             };
         }
+    }
 
 
+
+
+
+    public partial class Saves
+    {
+        public static bool BuildingHasProcess(int buildingIndex) 
+            => String[Key_Save.building_process_data(buildingIndex)].Value != string.Empty;
+
+        public static void SetProcessFree(int buildingIndex)
+            => String[Key_Save.building_process_data(buildingIndex)].Value = string.Empty;
+
+
+        public static void SetProduction(int buildingIndex, ItemProductionData itemProduction)
+            => String[Key_Save.building_process_data(buildingIndex)]
+            .Value = itemProduction.ToDataString();
+
+        public static ItemProductionData GetProduction(int buildingIndex)
+            => ItemProductionData.Convert(String[Key_Save.building_process_data(buildingIndex)].Value);
+
+        public static Recipe GetCurrentRecipe(int buildingIndex)
+        {
+            BuildingType buildingType = GetBuildingData(buildingIndex).buildingType;
+            int recipeIndex = GetProduction(buildingIndex).recipeIndex;
+            return GameResources.GetRecipesConfig(buildingType).GetRecipe(recipeIndex);
+        }
 
     }
 }

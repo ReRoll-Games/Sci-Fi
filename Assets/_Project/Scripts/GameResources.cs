@@ -36,7 +36,8 @@ public static class GameResources
 
     public static TecnhologyConfig GetTecnhologyConfig(TechnologyType technologyType)
         => Resources.Load<TecnhologyConfig>($"Configs/Technologies/{technologyType}");
-
-
+    
+    public static GameObject GetMiningPositionPrefab(ItemType itemType)
+        => Resources.Load<GameObject>($"Configs/MiningPositions/{itemType}");
 
 }

@@ -3,5 +3,6 @@ public enum TechnologyType
 {
     Center,
     Furnace,
-    Basement
+    Basement,
+    Drill,
 }

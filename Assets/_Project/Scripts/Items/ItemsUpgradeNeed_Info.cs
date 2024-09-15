@@ -22,7 +22,9 @@ public class ItemsUpgradeNeed_Info : Info
     
     protected override void UpdateValue()
     {
-        var itemsNeed = Saves.GetItemsNeedForUpgradeBuilding(_window.building.index);
+        var buildingData = Saves.GetBuildingData(_window.building.index);
+        var itemsNeed = GameResources.GetBuildingUpgradeConfig
+            (buildingData.buildingType).GetItemsForUpgrade(buildingData.level);
 
         for (int i = 0; i < itemsNeed.Count; i++)
         {

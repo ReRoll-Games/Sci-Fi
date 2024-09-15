@@ -19,7 +19,7 @@ public class RecipeWidget : MonoBehaviour
         this.recipe = recipe;
         this.recipeIndex = recipeIndex;
 
-        _timeText.text = recipe.productionTime.ToTimeString();
+        _timeText.text = ((float)recipe.productionTime).ToTimeString();
 
         for (int i = 0; i < recipe.inputItems.Count; i++)
         {
