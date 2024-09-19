@@ -1,5 +1,6 @@
 using UnityEngine;
 using VG;
+using NaughtyAttributes;
 
 
 public class Building : MonoBehaviour
@@ -7,8 +8,10 @@ public class Building : MonoBehaviour
     public static Building interactableBuilding { get; private set; }
 
     [field: SerializeField] public BuildingType buildingType { get; private set; }
+    [SerializeField] private bool _hasWindow;
     public int index { get; set; }
 
+    [ShowIf(nameof(ShowAreaTrigger))]
     [SerializeField] private AreaTrigger _areaTrigger;
 
     private Window _currentWindow;
@@ -18,16 +21,27 @@ public class Building : MonoBehaviour
 
 
 
+    private bool ShowAreaTrigger() => _hasWindow;
+
+
     private void OnEnable()
     {
-        _areaTrigger.onEnter += OnAreaEnter;
-        _areaTrigger.onExit += OnAreaExit;
+        if (_hasWindow)
+        {
+            _areaTrigger.onEnter += OnAreaEnter;
+            _areaTrigger.onExit += OnAreaExit;
+        }
+        
     }
 
     private void OnDisable()
     {
-        _areaTrigger.onEnter -= OnAreaEnter;
-        _areaTrigger.onExit -= OnAreaExit;
+        if (_hasWindow)
+        {
+            _areaTrigger.onEnter -= OnAreaEnter;
+            _areaTrigger.onExit -= OnAreaExit;
+        }
+        
     }
 
     private void OnAreaExit()

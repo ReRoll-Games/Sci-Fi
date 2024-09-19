@@ -4,8 +4,9 @@ using UnityEngine;
 [System.Serializable]
 public struct MiningPositionData
 {
-    public Vector2Int gridPosition;
     public ItemType itemType;
+    public Vector2Int gridPosition;
+    public int availableLevel;
 }
 
 
@@ -16,7 +17,16 @@ public class MiningPositionsConfig : ScriptableObject
 
     public int positionsQuantity => _miningPositions.Count;
 
-    public MiningPositionData GetMiningPositionData(int index) => _miningPositions[index];
+
+    public List<MiningPositionData> GetMiningPositions(int level)
+    {
+        var positions = new List<MiningPositionData>();
+        for (int i = 0; i < _miningPositions.Count; i++)
+            if (level >= _miningPositions[i].availableLevel) 
+                positions.Add(_miningPositions[i]);
+
+        return positions;
+    }
 
 
 }

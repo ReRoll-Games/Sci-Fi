@@ -12,21 +12,31 @@ public class PlaceCreator : MonoBehaviour
     [SerializeField] private MiningPositionsConfig _miningPositionConfig;
 
 
+    public static List<Vector2Int> BasementPositions { get; private set; }
+    public static List<Vector2Int> MiningPositions { get; private set; }
 
-    public static List<Vector2Int> basementPositions { get; private set; }
 
     private void Awake()
     {
-        basementPositions = new List<Vector2Int>();
-        Saves.String[Key_Save.technologies_data].onChanged += UpdateBasement;
+        BasementPositions = new List<Vector2Int>();
+        MiningPositions = new List<Vector2Int>();
+        Saves.String[Key_Save.technologies_data].onChanged += UpdatePlaces;
     }
 
     private void OnDestroy()
     {
-        Saves.String[Key_Save.technologies_data].onChanged -= UpdateBasement;
+        Saves.String[Key_Save.technologies_data].onChanged -= UpdatePlaces;
     }
 
-    private void Start() => UpdateBasement();
+    private void Start() => UpdatePlaces();
+ 
+
+
+    private void UpdatePlaces()
+    {
+        UpdateBasement();
+        UpdateMiningPositions();
+    }
 
 
     private void UpdateBasement()
@@ -35,13 +45,40 @@ public class PlaceCreator : MonoBehaviour
 
         foreach (var basementPosition in _basementConfig.GetBasementPositions(basementLevel))
         {
-            if (basementPositions.Contains(basementPosition) == false)
+            if (BasementPositions.Contains(basementPosition) == false)
             {
                 Vector3 position = _grid.GetCellCenterLocal
                     (new Vector3Int(basementPosition.x, basementPosition.y, 0));
                 Instantiate(_basementPrefab, position, Quaternion.Euler(0f, 30f, 0f));
-                basementPositions.Add(basementPosition);
+                BasementPositions.Add(basementPosition);
             }
         }
     }
+
+
+    private void UpdateMiningPositions()
+    {
+        int miningPositionsLevel = Saves.GetTechnologyLevel(TechnologyType.MiningPositions);
+
+        foreach (var miningPosition in _miningPositionConfig.GetMiningPositions(miningPositionsLevel))
+        {
+            if (MiningPositions.Contains(miningPosition.gridPosition) == false)
+            {
+                var prefab = GameResources.GetMiningPositionPrefab(miningPosition.itemType);
+                var gridPosition = miningPosition.gridPosition;
+
+                Vector3 position = _grid.GetCellCenterLocal
+                    (new Vector3Int(gridPosition.x, gridPosition.y, 0));
+
+                Instantiate(prefab, position, Quaternion.Euler(0f, 30f, 0f));
+                MiningPositions.Add(gridPosition);
+            }
+        }
+    }
+
+
+
+
+
+
 }

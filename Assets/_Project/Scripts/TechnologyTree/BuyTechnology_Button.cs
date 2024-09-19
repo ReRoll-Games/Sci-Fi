@@ -1,23 +1,35 @@
-using UnityEngine;
 using VG;
-
 
 public class BuyTechnology_Button : ButtonHandler
 {
-    [SerializeField] private TechnologyNode_Info _technologyNodeInfo;
-
+    
     protected override void OnClick()
     {
-        var tecnhologyConfig = GameResources
-            .GetTecnhologyConfig(_technologyNodeInfo.technologyType);
+        TechnologyType technologyType = TechnologyDescription.TechnologyType;
+        int level = TechnologyDescription.Level;
 
-        if (Saves.Int[Key_Save.techno_coins].Value >= tecnhologyConfig.price)
+        var tecnhologyConfig = GameResources.GetTecnhologyConfig(technologyType);
+        var requiredItems = tecnhologyConfig.GetRequiredItems(level);
+
+        bool buyAvailable = true;
+        foreach (var requiredItem in requiredItems)
         {
-            Saves.SetTechnologyLevel(_technologyNodeInfo.technologyType, _technologyNodeInfo.level);
-            Saves.Int[Key_Save.techno_coins].Value -= tecnhologyConfig.price;
+            int itemAmount = Saves.Int[Key_Save.item_quantity(requiredItem.itemType)].Value;
+            if (itemAmount < requiredItem.quantity)
+            {
+                buyAvailable = false;
+                break;
+            }
         }
 
-        
+        if (buyAvailable)
+        {
+            foreach (var requiredItem in requiredItems)
+                Saves.Int[Key_Save.item_quantity(requiredItem.itemType)].Value -= requiredItem.quantity;
+
+            Saves.SetTechnologyLevel(technologyType, level);
+            TechnologyDescription.Close();
+        }
     }
     
 }

@@ -11,8 +11,8 @@ public static class GameResources
         => Resources.Load<GameObject>($"Prefabs/Buildings/{buildingType}_{level}")
         .GetComponent<Building>();
 
-    public static GameObject GetBuildModePrefab(BuildingType buildingType)
-        => Resources.Load<GameObject>($"Prefabs/BuildMode/{buildingType}");
+    public static BuildModeUnit GetBuildModePrefab(BuildingType buildingType)
+        => Resources.Load<GameObject>($"Prefabs/BuildMode/{buildingType}").GetComponent<BuildModeUnit>();
 
 
     public static BuildingUpgradeConfig GetBuildingUpgradeConfig(BuildingType buildingType)
@@ -38,6 +38,6 @@ public static class GameResources
         => Resources.Load<TecnhologyConfig>($"Configs/Technologies/{technologyType}");
     
     public static GameObject GetMiningPositionPrefab(ItemType itemType)
-        => Resources.Load<GameObject>($"Configs/MiningPositions/{itemType}");
+        => Resources.Load<GameObject>($"Prefabs/MiningPositions/{itemType}");
 
 }

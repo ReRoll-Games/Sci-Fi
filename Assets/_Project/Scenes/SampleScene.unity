@@ -1395,37 +1395,6 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
---- !u!1 &705233983
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 705233984}
-  m_Layer: 0
-  m_Name: MiningPositionCreator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &705233984
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705233983}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1807777985}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747203520
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,7 +1717,7 @@ GameObject:
   - component: {fileID: 1066085645}
   - component: {fileID: 1066085646}
   m_Layer: 0
-  m_Name: BasementCreator
+  m_Name: PlaceCreator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1785,7 +1754,8 @@ MonoBehaviour:
   _basementPrefab: {fileID: 4655666559512859221, guid: f5e460ad35c7ccd49a4e165eb1af7153,
     type: 3}
   _basementConfig: {fileID: 11400000, guid: 73017f144ded8314a99f30f2dfe95eee, type: 2}
-  _miningPositionConfig: {fileID: 0}
+  _miningPositionConfig: {fileID: 11400000, guid: 7df9ba0daba9a9e42990cba9bfb87c01,
+    type: 2}
 --- !u!1 &1170384135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,7 +2243,6 @@ Transform:
   - {fileID: 7060345}
   - {fileID: 1807654767}
   - {fileID: 1066085645}
-  - {fileID: 705233984}
   m_Father: {fileID: 1560689126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1897784332
