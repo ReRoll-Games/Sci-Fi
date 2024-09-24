@@ -1,25 +1,28 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using VG;
 
 public class RecipeWidget : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private List<ItemIcon> _inputItemIcons;
-    [SerializeField] private ItemIcon _outputItemIcon;
+    [SerializeField] private Image _outputItemImage;
+    [SerializeField] private Image _arrowImage;
+    [SerializeField] private List<Sprite> _arrowSprites;
 
-    public Recipe recipe {  get; private set; }
-
-    public int recipeIndex { get; private set; }
+    public Recipe Recipe { get; private set; }
 
 
-    public void SetRecipe(Recipe recipe, int recipeIndex)
+    public void SetRecipe(Recipe recipe)
     {
-        this.recipe = recipe;
-        this.recipeIndex = recipeIndex;
+        Recipe = recipe;
 
         _timeText.text = ((float)recipe.productionTime).ToTimeString();
+        _nameText.text = recipe.Name;
+        _arrowImage.sprite = _arrowSprites[recipe.inputItems.Count - 1];
 
         for (int i = 0; i < recipe.inputItems.Count; i++)
         {
@@ -30,7 +33,7 @@ public class RecipeWidget : MonoBehaviour
         for (int i = recipe.inputItems.Count; i < _inputItemIcons.Count; i++)
             _inputItemIcons[i].gameObject.SetActive(false);
 
-        _outputItemIcon.SetItemType(recipe.outputItem);
+        _outputItemImage.sprite = GameResources.GetItemSprite(recipe.outputItem);
     }
 
 

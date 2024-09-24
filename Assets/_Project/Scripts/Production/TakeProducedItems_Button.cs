@@ -8,13 +8,13 @@ public class TakeProducedItems_Button : ButtonHandler
 
     protected override void OnClick()
     {
-        var production = Saves.GetProduction(_window.building.index);
-        var recipe = Saves.GetCurrentRecipe(_window.building.index);
+        var production = Saves.GetProduction(_window.Building.Index);
+        var recipe = Saves.GetCurrentRecipe(_window.Building.Index);
 
-        Saves.Int[Key_Save.item_quantity(recipe.outputItem)].Value += production.produced;
+        Saves.Int[Key_Save.item_amount(recipe.outputItem)].Value += production.produced;
         production.produced = 0;
 
-        Saves.SetProduction(_window.building.index, production);
+        Saves.SetProduction(_window.Building.Index, production);
     }
     
 }

@@ -26,7 +26,7 @@ public class InventoryItem : MonoBehaviour
     public void SetType(ItemType type)
     {
         this.type = type;
-        _iconImage.sprite = GameResources.GetItemIconSprite(type);
+        _iconImage.sprite = GameResources.GetItemSprite(type);
     }
 
 

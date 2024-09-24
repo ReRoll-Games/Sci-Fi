@@ -1,8 +1,7 @@
 
 public enum BuildingType
 {
-    Center, 
-    Ship,
-    Furnace,
-    Drill
+    Center = 0, 
+    Furnace = 2,
+    Drill = 3,
 }

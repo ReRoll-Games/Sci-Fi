@@ -14,8 +14,8 @@ public class BuyTechnology_Button : ButtonHandler
         bool buyAvailable = true;
         foreach (var requiredItem in requiredItems)
         {
-            int itemAmount = Saves.Int[Key_Save.item_quantity(requiredItem.itemType)].Value;
-            if (itemAmount < requiredItem.quantity)
+            int itemAmount = Saves.Int[Key_Save.item_amount(requiredItem.itemType)].Value;
+            if (itemAmount < requiredItem.amount)
             {
                 buyAvailable = false;
                 break;
@@ -25,7 +25,7 @@ public class BuyTechnology_Button : ButtonHandler
         if (buyAvailable)
         {
             foreach (var requiredItem in requiredItems)
-                Saves.Int[Key_Save.item_quantity(requiredItem.itemType)].Value -= requiredItem.quantity;
+                Saves.Int[Key_Save.item_amount(requiredItem.itemType)].Value -= requiredItem.amount;
 
             Saves.SetTechnologyLevel(technologyType, level);
             TechnologyDescription.Close();

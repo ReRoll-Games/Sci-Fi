@@ -4,8 +4,9 @@ using UnityEngine;
 [System.Serializable]
 public struct MiningPositionData
 {
-    public ItemType itemType;
+    public List<MiningProportion> miningProportions;
     public Vector2Int gridPosition;
+    public GameObject prefab;
     public int availableLevel;
 }
 
@@ -27,6 +28,18 @@ public class MiningPositionsConfig : ScriptableObject
 
         return positions;
     }
+
+    public MiningPositionData GetMiningPositionData(int index) => _miningPositions[index];
+
+    public MiningPositionData GetMiningPositionData(Vector2Int gridPosition)
+    {
+        for (int i = 0; i < _miningPositions.Count; i++)
+            if (gridPosition == _miningPositions[i].gridPosition) 
+                return _miningPositions[i];
+
+        throw new System.Exception($"Wrong grid position: {gridPosition}.");
+    }
+
 
 
 }

@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using VG;
 
 public class TechnologyDescription : MonoBehaviour
 {
@@ -31,7 +29,7 @@ public class TechnologyDescription : MonoBehaviour
         var technologyConfig = GameResources.GetTecnhologyConfig(technologyType);
 
         _instance._panel.SetActive(true);
-        _instance._itemWidget.SetItems(technologyConfig.GetRequiredItems(level));
+        //_instance._itemWidget.SetItems(technologyConfig.GetRequiredItems(level));
         _instance._icon.sprite = technologyConfig.GetIconSprite(level);
         _instance._titleText.text = technologyConfig.GetTitle(level);
         _instance._descriptionText.text = technologyConfig.GetDescription(level);

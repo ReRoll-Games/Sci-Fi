@@ -21,10 +21,10 @@ namespace VG
             new ItemBool(Key_Save.ads_enabled, true);
             new ItemString(Key_Save.last_time, DateTime.Now.ToString());
 
-            new ItemInt(Key_Save.techno_coins, 500);
+            new ItemInt(Key_Save.money, 500);
 
             foreach (ItemType itemType in Key_Save.allItemTypes)
-                new ItemInt(Key_Save.item_quantity(itemType), 0);
+                new ItemInt(Key_Save.item_amount(itemType), 0);
 
 
 
@@ -35,9 +35,8 @@ namespace VG
                     new ItemString(Key_Save.building_data(0), new BuildingData
                     {
                         buildingType = BuildingType.Center,
-                        level = 0,
-                        gridPosition = new UnityEngine.Vector3Int(1, 1, 0),
-                        state = BuildingState.Upgrade
+                        level = 1,
+                        gridPosition = new UnityEngine.Vector2Int(1, 1),
                     }.ToDataString());
 
                     new ItemString(Key_Save.building_process_data(0), string.Empty);

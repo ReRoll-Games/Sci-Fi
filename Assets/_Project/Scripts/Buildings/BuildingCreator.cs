@@ -59,10 +59,10 @@ public class BuildingCreator : MonoBehaviour
         Building buildingPrefab =
                 GameResources.GetBuildingPrefab(buildingData.buildingType, buildingData.level);
 
-        Vector3 position = instance._grid.GetCellCenterLocal(buildingData.gridPosition);
+        Vector3 position = instance._grid.GetCellCenterLocal(buildingData.gridPosition3D);
         position.y = offsetY;
         var buildingInstance = Instantiate(buildingPrefab, position, Quaternion.identity);
-        buildingInstance.index = buildingData.index;
+        buildingInstance.SetIndex(buildingData.index);
         buildingPositions.Add(new Vector2Int(buildingData.gridPosition.x, buildingData.gridPosition.y));
 
         if (buildingData.index < instance._buildings.Count)

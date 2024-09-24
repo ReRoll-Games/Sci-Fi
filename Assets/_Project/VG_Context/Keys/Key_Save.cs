@@ -10,12 +10,12 @@ namespace VG
         public static string last_time => "lt";
 
 
-        public static string techno_coins => "co";
+        public static string money => "co";
         public static string technologies_data => "tech";
 
         public static string building_data(int index) => $"b{index}";
         public static string building_process_data(int index) => $"bp{index}";
-        public static string item_quantity(ItemType itemType) => $"{itemType}";
+        public static string item_amount(ItemType itemType) => $"{itemType}";
 
 
         private static List<ItemType> _allItemTypes;

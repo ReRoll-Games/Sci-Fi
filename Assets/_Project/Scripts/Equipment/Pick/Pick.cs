@@ -75,7 +75,7 @@ public class Pick : MonoBehaviour
         if (_extractTimeLeft < 0f)
         {
             _extractTimeLeft = _extractTime;
-            Saves.Int[Key_Save.item_quantity(_targetOreSource.itemType)].Value++;
+            Saves.Int[Key_Save.item_amount(_targetOreSource.itemType)].Value++;
         }
 
     }

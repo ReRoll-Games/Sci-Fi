@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3676deb5df7b3bc40939d0d0d0c626b3, type: 3}
   m_Name: Furnace
   m_EditorClassIdentifier: 
-  <recipes>k__BackingField:
-  - inputItems:
+  _recipes:
+  - _nameTranslationKey: "\u0416\u0435\u043B\u0435\u0437\u043D\u044B\u0439 \u0441\u043B\u0438\u0442\u043E\u043A"
+    inputItems:
     - itemType: 0
-      quantity: 5
+      amount: 10
     - itemType: 1
-      quantity: 2
+      amount: 5
     outputItem: 2
-    productionTime: 60
+    productionTime: 10
+    index: 0

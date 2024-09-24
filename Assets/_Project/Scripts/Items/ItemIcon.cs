@@ -12,7 +12,7 @@ public class ItemIcon : MonoBehaviour
     public void SetItemType(ItemType itemType)
     {
         this.itemType = itemType;
-        _iconImage.sprite = GameResources.GetItemIconSprite(itemType);
+        _iconImage.sprite = GameResources.GetItemSprite(itemType);
     }
 
     public void SetQuantity(int quantity) => _quantityText.text = quantity.ToString();
@@ -20,8 +20,8 @@ public class ItemIcon : MonoBehaviour
 
     public void SetItemPack(ItemPack itemPack)
     {
-        _iconImage.sprite = GameResources.GetItemIconSprite(itemPack.itemType);
-        _quantityText.text = itemPack.quantity.ToString();
+        _iconImage.sprite = GameResources.GetItemSprite(itemPack.itemType);
+        _quantityText.text = itemPack.amount.ToString();
     }
 
 

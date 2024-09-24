@@ -3,6 +3,14 @@ using UnityEngine;
 
 public static class GameResources
 {
+    public static BuildingPricesConfig BuildingPricesConfig =>
+        Resources.Load<BuildingPricesConfig>($"Configs/Common/BuildingPrices");
+
+    public static MiningPositionsConfig MiningPositionsConfig =>
+        Resources.Load<MiningPositionsConfig>($"Configs/Common/MiningPositions");
+
+
+
 
     public static RecipesConfig GetRecipesConfig(BuildingType buildingType)
         => Resources.Load<RecipesConfig>($"Configs/Recipes/{buildingType}");
@@ -27,11 +35,11 @@ public static class GameResources
         => Resources.Load<GameObject>($"Prefabs/Windows/{buildingType}")
         .GetComponent<Window>();
 
-    public static Sprite GetItemIconSprite(ItemType itemType)
+    public static Sprite GetItemSprite(ItemType itemType)
         => Resources.Load<Sprite>($"Sprites/ItemIcons/{itemType}");
 
 
-    public static GameObject GetPanel(PanelType panelType)
+    public static GameObject GetPanel(PadPageType panelType)
         => Resources.Load<GameObject>($"Prefabs/Panels/{panelType}");
 
     public static TecnhologyConfig GetTecnhologyConfig(TechnologyType technologyType)

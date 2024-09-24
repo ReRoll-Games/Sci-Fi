@@ -60,21 +60,24 @@ public class BuildMode : MonoBehaviour
     public static void ApplyBuild()
     {
         int buildingIndex = Saves.GetBuildingQuantity() - 1;
+        var buildingType = instance._currentBuildingType;
+        var gridPosition = instance._grid.WorldToCell(instance._currentBuildModeUnit.transform.position);
 
         var buildingData = new BuildingData
         {
-            buildingType = instance._currentBuildingType,
+            buildingType = buildingType,
             index = buildingIndex,
             level = 1,
-            state = BuildingState.Active,
-            gridPosition = instance._grid.WorldToCell(instance._currentBuildModeUnit.transform.position)
+            gridPosition = new Vector2Int(gridPosition.x, gridPosition.y),
         };
+
+        int price = GameResources.BuildingPricesConfig.GetPrice
+            (buildingType, Saves.GetBuildingAmount(buildingType));
+
+        Saves.Int[Key_Save.money].Value -= price;
 
         Saves.SetBuildingData(buildingData);
         BuildingCreator.InstantiateBuilding(buildingData);
-
-        var needItems = 
-            GameResources.GetBuildingUpgradeConfig(instance._currentBuildingType);
 
         Disable();
     }

@@ -1,5 +1,7 @@
 
 
+using System.Linq;
+
 namespace VG
 {
 
@@ -7,13 +9,31 @@ namespace VG
     {
         public int recipeIndex;
         public int timeLeft;
+        public int[] inputItems;
         public int produced;
 
-        public string ToDataString() => $"{recipeIndex}_{timeLeft}_{produced}";
+        public string ToDataString()
+        {
+            string data = string.Empty; 
+
+            for (int i = 0; i < inputItems.Length; i++)
+                data += $"{inputItems[i]}_";
+
+            data += $",{recipeIndex}_{timeLeft}_{produced}";
+
+            return data;
+        }
 
         public static ItemProductionData Convert(string data)
         {
-            string[] splitData = data.Split('_');
+            string[] splitData = data.Split(',');
+            string[] splitInputItemsData = splitData[0].Split('_');
+            string[] splitOtherData = splitData[1].Split('_');
+
+            var inputItems = new int[splitInputItemsData.Length];
+            for (int i = 0; i < splitInputItemsData.Length; i++)
+                inputItems[i] = int.Parse(splitInputItemsData[i]);
+
             return new ItemProductionData
             {
                 recipeIndex = int.Parse(splitData[0]),

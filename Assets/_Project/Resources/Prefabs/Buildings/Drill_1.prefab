@@ -46,9 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f456d6a8089fa4d953f9239943e4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <buildingType>k__BackingField: 3
-  _hasWindow: 0
-  _areaTrigger: {fileID: 0}
+  <BuildingType>k__BackingField: 3
 --- !u!1 &1234557725321661145
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +631,7 @@ GameObject:
   - component: {fileID: 7340190658131162144}
   - component: {fileID: 7782659629139388085}
   m_Layer: 0
-  m_Name: BuildButtons
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

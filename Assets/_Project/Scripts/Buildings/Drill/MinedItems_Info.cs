@@ -7,12 +7,12 @@ public class MinedItems_Info : Info
 
     protected override void Subscribe()
     {
-        Saves.String[Key_Save.building_process_data(_building.index)].onChanged += UpdateValue;
+        Saves.String[Key_Save.building_process_data(_building.Index)].onChanged += UpdateValue;
     }
     
     protected override void Unsubscribe()
     {
-        Saves.String[Key_Save.building_process_data(_building.index)].onChanged -= UpdateValue;
+        Saves.String[Key_Save.building_process_data(_building.Index)].onChanged -= UpdateValue;
     }
     
     protected override void UpdateValue()

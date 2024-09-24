@@ -15,13 +15,13 @@ public class GameEvents : MonoBehaviour
     private void Awake()
     {
         foreach (var itemType in Key_Save.allItemTypes)
-            Saves.Int[Key_Save.item_quantity(itemType)].onChanged += OnInventoryChanged;
+            Saves.Int[Key_Save.item_amount(itemType)].onChanged += OnInventoryChanged;
     }
 
     private void OnDestroy()
     {
         foreach (var itemType in Key_Save.allItemTypes)
-            Saves.Int[Key_Save.item_quantity(itemType)].onChanged -= OnInventoryChanged;
+            Saves.Int[Key_Save.item_amount(itemType)].onChanged -= OnInventoryChanged;
     }
 
     private void OnInventoryChanged() => onInventoryChanged?.Invoke();

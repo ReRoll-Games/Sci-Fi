@@ -8,8 +8,6 @@ public class PlaceCreator : MonoBehaviour
     [Header("Basement")]
     [SerializeField] private GameObject _basementPrefab;
     [SerializeField] private BasementConfig _basementConfig;
-    [Header("Mining Positions")]
-    [SerializeField] private MiningPositionsConfig _miningPositionConfig;
 
 
     public static List<Vector2Int> BasementPositions { get; private set; }
@@ -60,17 +58,17 @@ public class PlaceCreator : MonoBehaviour
     {
         int miningPositionsLevel = Saves.GetTechnologyLevel(TechnologyType.MiningPositions);
 
-        foreach (var miningPosition in _miningPositionConfig.GetMiningPositions(miningPositionsLevel))
+        foreach (var miningPosition in GameResources.MiningPositionsConfig
+            .GetMiningPositions(miningPositionsLevel))
         {
             if (MiningPositions.Contains(miningPosition.gridPosition) == false)
             {
-                var prefab = GameResources.GetMiningPositionPrefab(miningPosition.itemType);
                 var gridPosition = miningPosition.gridPosition;
 
                 Vector3 position = _grid.GetCellCenterLocal
                     (new Vector3Int(gridPosition.x, gridPosition.y, 0));
 
-                Instantiate(prefab, position, Quaternion.Euler(0f, 30f, 0f));
+                Instantiate(miningPosition.prefab, position, Quaternion.Euler(0f, 30f, 0f));
                 MiningPositions.Add(gridPosition);
             }
         }

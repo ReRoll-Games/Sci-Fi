@@ -9,7 +9,7 @@ public class UpgradeBuilding_Button : ButtonHandler
 
     protected override void OnClick()
     {
-        var buildingData = Saves.GetBuildingData(_window.building.index);
+        var buildingData = Saves.GetBuildingData(_window.Building.Index);
         var itemsNeed = GameResources.GetBuildingUpgradeConfig
             (buildingData.buildingType).GetItemsForUpgrade(buildingData.level);
 
@@ -19,7 +19,7 @@ public class UpgradeBuilding_Button : ButtonHandler
     private bool UpgradeAvailable(List<ItemPack> itemsNeed)
     {
         foreach (var itemPack in itemsNeed)
-            if (Saves.Int[Key_Save.item_quantity(itemPack.itemType)].Value < itemPack.quantity)
+            if (Saves.Int[Key_Save.item_amount(itemPack.itemType)].Value < itemPack.amount)
                 return false;
 
         return true;
@@ -28,11 +28,10 @@ public class UpgradeBuilding_Button : ButtonHandler
     private void ApplyUpgrade(List<ItemPack> itemsNeed)
     {
         foreach (var itemPack in itemsNeed)
-            Saves.Int[Key_Save.item_quantity(itemPack.itemType)].Value -= itemPack.quantity;
+            Saves.Int[Key_Save.item_amount(itemPack.itemType)].Value -= itemPack.amount;
 
-        var buildingData = Saves.GetBuildingData(_window.building.index);
+        var buildingData = Saves.GetBuildingData(_window.Building.Index);
         buildingData.level++;
-        buildingData.state = BuildingState.Active;
         Saves.SetBuildingData(buildingData);
         GameEvents.BuildingUpgrade(buildingData.index);
     }

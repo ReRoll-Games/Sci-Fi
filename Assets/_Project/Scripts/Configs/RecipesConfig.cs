@@ -4,10 +4,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Project/Configs/Recipes", fileName = "Recipes")]
 public class RecipesConfig : ScriptableObject
 {
-    [field: SerializeField] public List<Recipe> recipes {  get; private set; }
+    [SerializeField] private List<Recipe> _recipes;
+    public int RecipeAmount => _recipes.Count;
 
 
-    public Recipe GetRecipe(int index) => recipes[index];
+    public Recipe GetRecipe(int index)
+    {
+        var recipe = _recipes[index];
+        recipe.index = index;
+        return recipe;
+    }
 
 
 
