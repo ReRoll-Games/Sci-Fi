@@ -5,14 +5,16 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public abstract class SelectorHandler : MonoBehaviour
 {
-    public Button Button { get; private set; }
+    private Button _button;
 
-
-    protected virtual void Awake()
-    {
-        Button = GetComponent<Button>();
+    public Button Button 
+    {  
+        get
+        {
+            _button ??= GetComponent<Button>();
+            return _button;
+        }
     }
-
 
     public abstract void Select();
 

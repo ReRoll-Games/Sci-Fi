@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32abca6ba8e02c41be96d55d884c340, type: 3}
+  m_Name: Tasks
+  m_EditorClassIdentifier: 
+  <SecondTaskAvailableFromIndex>k__BackingField: 5
+  <ThirdTaskAvailableFromIndex>k__BackingField: 10
+  _taskData:
+  - taskType: 0
+    parameters: 5_Coal
+    reward: 10
+  - taskType: 0
+    parameters: 10_IronIngot
+    reward: 15

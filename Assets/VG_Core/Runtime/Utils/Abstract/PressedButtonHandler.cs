@@ -21,8 +21,16 @@ namespace VG
         }
 
 
-        public void OnPointerDown(PointerEventData eventData) => _pressed = true;
-        public void OnPointerUp(PointerEventData eventData) => _pressed = false;
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            _pressed = true;
+            OnPressStart();
+        }
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            _pressed = false;
+            OnPressFinish();
+        }
 
 
         private void Update()
@@ -30,8 +38,11 @@ namespace VG
             if (_pressed) PressedUpdate();
         }
 
+
+        protected abstract void OnPressStart();
         protected abstract void PressedUpdate();
 
-        
+        protected abstract void OnPressFinish();
+
     }
 }

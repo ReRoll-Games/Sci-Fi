@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4969132995909309340}
-  - component: {fileID: 9154247423116131227}
+  - component: {fileID: 6654019918301204983}
   m_Layer: 5
   m_Name: ItemIcon
   m_TagString: Untagged
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 410}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9154247423116131227
+--- !u!114 &6654019918301204983
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,11 +49,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1546865086884451624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbc45f6a451098946bdd2d1208d50b09, type: 3}
+  m_Script: {fileID: 11500000, guid: 25c97cf1df4370a4a807c6f78be24409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iconImage: {fileID: 4267685489856211763}
-  _quantityText: {fileID: 6797332571823924256}
+  _iconImage: {fileID: 0}
+  _quantityText: {fileID: 0}
+  _useTransparent: 1
 --- !u!1 &5133434502850861312
 GameObject:
   m_ObjectHideFlags: 0

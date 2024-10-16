@@ -12,11 +12,11 @@ public class Selector : MonoBehaviour
     {
         for (int i = 0; i < _handlers.Count; i++)
         {
+            int index = i;
             _handlers[i].Button.onClick.AddListener(() =>
             {
-                int index = i;
                 Highlight(index);
-                _handlers[i].Select();
+                _handlers[index].Select();
             });
         }
     }

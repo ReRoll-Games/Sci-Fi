@@ -23,7 +23,7 @@ public class Pad : MonoBehaviour
     private bool _padOpened = false;
     private Tween _currentTween;
 
-    private const float closedPositionY = 2000f;
+    private const float closedPositionY = -2000f;
     private const float interactDuration = 0.4f;
 
     private void Awake()
@@ -46,9 +46,6 @@ public class Pad : MonoBehaviour
 
     public static void Close()
     {
-        foreach (Transform child in _instance._contentContainer)
-            Destroy(child.gameObject);
-
         _instance.Animate(open: false);
     }
 

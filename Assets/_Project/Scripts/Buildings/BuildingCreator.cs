@@ -44,7 +44,7 @@ public class BuildingCreator : MonoBehaviour
     {
         _buildings = new List<Building>();
 
-        for (int i = 0; i < Saves.maxBuildingsQuantity; i++)
+        for (int i = 0; i < Saves.maxBuildingsAmount; i++)
         {
             if (Saves.String[Key_Save.building_data(i)].Value == string.Empty)
                 continue;

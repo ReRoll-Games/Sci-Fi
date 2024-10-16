@@ -71,10 +71,9 @@ public class BuildMode : MonoBehaviour
             gridPosition = new Vector2Int(gridPosition.x, gridPosition.y),
         };
 
-        int price = GameResources.BuildingPricesConfig.GetPrice
-            (buildingType, Saves.GetBuildingAmount(buildingType));
+        int price = GameResources.GetBuildingConfig(buildingType).GetCurrentPrice();
 
-        Saves.Int[Key_Save.money].Value -= price;
+        Saves.Int[Key_Save.gears].Value -= price;
 
         Saves.SetBuildingData(buildingData);
         BuildingCreator.InstantiateBuilding(buildingData);

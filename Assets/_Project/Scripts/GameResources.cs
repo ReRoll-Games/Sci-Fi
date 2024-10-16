@@ -1,11 +1,8 @@
 
 using UnityEngine;
 
-public static class GameResources
+public static partial class GameResources
 {
-    public static BuildingPricesConfig BuildingPricesConfig =>
-        Resources.Load<BuildingPricesConfig>($"Configs/Common/BuildingPrices");
-
     public static MiningPositionsConfig MiningPositionsConfig =>
         Resources.Load<MiningPositionsConfig>($"Configs/Common/MiningPositions");
 
@@ -22,11 +19,6 @@ public static class GameResources
     public static BuildModeUnit GetBuildModePrefab(BuildingType buildingType)
         => Resources.Load<GameObject>($"Prefabs/BuildMode/{buildingType}").GetComponent<BuildModeUnit>();
 
-
-    public static BuildingUpgradeConfig GetBuildingUpgradeConfig(BuildingType buildingType)
-        => Resources.Load<BuildingUpgradeConfig>($"Configs/BuildingUpgrade/{buildingType}");
-
-
     public static Window GetUpgradeWindowPrefab()
         => Resources.Load<GameObject>($"Prefabs/Windows/Upgrade")
         .GetComponent<Window>();
@@ -42,8 +34,8 @@ public static class GameResources
     public static GameObject GetPanel(PadPageType panelType)
         => Resources.Load<GameObject>($"Prefabs/Panels/{panelType}");
 
-    public static TecnhologyConfig GetTecnhologyConfig(TechnologyType technologyType)
-        => Resources.Load<TecnhologyConfig>($"Configs/Technologies/{technologyType}");
+    public static TecnhologyConfig GetTecnhologyConfig(TechnologyType technologyType, int level)
+        => Resources.Load<TecnhologyConfig>($"Configs/Technologies/{technologyType}_{level}");
     
     public static GameObject GetMiningPositionPrefab(ItemType itemType)
         => Resources.Load<GameObject>($"Prefabs/MiningPositions/{itemType}");

@@ -37,8 +37,8 @@ public class WindowTrigger : MonoBehaviour
         if (_playerInsideArea) return;
 
         _playerInsideArea = true;
-        _window.Open();
         Building.SetInteractableBuilding(_window.Building);
+        _window.Open();
     }
 
 

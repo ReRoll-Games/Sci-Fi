@@ -20,51 +20,39 @@ public class ItemProduction : MonoBehaviour
 
     private void OnOneSecondSpent()
     {
-        if (Saves.BuildingHasProcess(_building.Index) == false)
-            return;
-
         var productionData = Saves.GetProduction(_building.Index);
         var recipe = Saves.GetCurrentRecipe(_building.Index);
 
-        if (productionData.timeLeft == 0)
-        {
-            if (ItemsEnoughForRecipe(recipe))
-                BeginProduction(recipe, ref productionData);
-        }
-        else
-        {
+        if (ItemsEnoughForRecipe(recipe, ref productionData)) 
             productionData.timeLeft--;
-            if (productionData.timeLeft == 0)
-            {
-                productionData.produced++;
 
-                if (ItemsEnoughForRecipe(recipe))
-                    BeginProduction(recipe, ref productionData);
-            }
-        }
+        else productionData.timeLeft = recipe.productionTime;
+
+        if (productionData.timeLeft <= 0)
+            MakeProduct(recipe, ref productionData);
 
         Saves.SetProduction(_building.Index, productionData);
     }
 
-    private bool ItemsEnoughForRecipe(in Recipe recipe)
+    private bool ItemsEnoughForRecipe(in Recipe recipe, ref ItemProductionData productionData)
     {
         for (int i = 0; i < recipe.inputItems.Count; i++)
-        {
-            int hasItemsQuantity = Saves.Int[Key_Save.item_amount(recipe.inputItems[i].itemType)].Value;
-            if (hasItemsQuantity < recipe.inputItems[i].amount)
+            if (productionData.inputItems[i] < recipe.inputItems[i].amount)
                 return false;
-        }
 
         return true;
     }
 
-    private void BeginProduction(in Recipe recipe, ref ItemProductionData productionData)
+    private void MakeProduct(in Recipe recipe, ref ItemProductionData productionData)
     {
-        foreach (var itemPack in recipe.inputItems)
-            Saves.Int[Key_Save.item_amount(itemPack.itemType)].Value -= itemPack.amount;
+        for (int i = 0; i < recipe.inputItems.Count; i++)
+            productionData.inputItems[i] -= recipe.inputItems[i].amount;
 
+        productionData.produced++;
         productionData.timeLeft = recipe.productionTime;
     }
+
+
 
 
 }

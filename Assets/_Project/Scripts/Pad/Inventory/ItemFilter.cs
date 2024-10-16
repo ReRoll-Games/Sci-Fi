@@ -27,7 +27,7 @@ public static class ItemFilter
 
     public static List<ItemType> GetFilteredItems()
     {
-        if (CurrentFilter == Filter.All) return Key_Save.allItemTypes;
+        if (CurrentFilter == Filter.All) return Key_Save.AllItemTypes;
 
         var items = new List<ItemType>();
         foreach (var itemFilter in itemFilters)

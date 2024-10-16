@@ -56,7 +56,7 @@ public class PlaceCreator : MonoBehaviour
 
     private void UpdateMiningPositions()
     {
-        int miningPositionsLevel = Saves.GetTechnologyLevel(TechnologyType.MiningPositions);
+        int miningPositionsLevel = Saves.GetTechnologyLevel(TechnologyType.Location);
 
         foreach (var miningPosition in GameResources.MiningPositionsConfig
             .GetMiningPositions(miningPositionsLevel))

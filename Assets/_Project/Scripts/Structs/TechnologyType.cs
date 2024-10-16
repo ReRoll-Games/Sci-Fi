@@ -5,5 +5,8 @@ public enum TechnologyType
     Furnace,
     Basement,
     Drill,
-    MiningPositions,
+    Location,
+    Factory,
+    Pick,
+    Converter
 }

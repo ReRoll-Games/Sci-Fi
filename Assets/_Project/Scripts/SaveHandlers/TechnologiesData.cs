@@ -1,6 +1,8 @@
 
 
 
+using System.Collections.Generic;
+
 namespace VG
 {
 
@@ -49,7 +51,7 @@ namespace VG
                 }
             }
 
-            String[Key_Save.technologies_data].Value += $"{technologyType}_{level},";
+            String[Key_Save.technologies_data].Value += $",{technologyType}_{level}";
         }
 
 

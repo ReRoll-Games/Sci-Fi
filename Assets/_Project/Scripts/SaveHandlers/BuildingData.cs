@@ -36,17 +36,17 @@ namespace VG
 
         public static int GetBuildingQuantity()
         {
-            for (int index = 0; index < maxBuildingsQuantity; index++)
+            for (int index = 0; index < maxBuildingsAmount; index++)
                 if (String[Key_Save.building_data(index)].Value == string.Empty)
                     return index + 1;
 
-            return maxBuildingsQuantity;
+            return maxBuildingsAmount;
         }
 
         public static int GetBuildingAmount(BuildingType buildingType)
         {
             int amount = 0;
-            for (int index = 0; index < maxBuildingsQuantity; index++)
+            for (int index = 0; index < maxBuildingsAmount; index++)
                 if (String[Key_Save.building_data(index)].Value != string.Empty)
                 {
                     if (GetBuildingData(index).buildingType == buildingType)

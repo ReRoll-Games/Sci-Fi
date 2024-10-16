@@ -12,14 +12,14 @@ public class Inventory_Info : Info
     protected override void Subscribe()
     {
         ItemFilter.onFilterChanged += UpdateValue;
-        foreach (ItemType itemType in Key_Save.allItemTypes)
+        foreach (ItemType itemType in Key_Save.AllItemTypes)
             Saves.Int[Key_Save.item_amount(itemType)].onChanged += UpdateValue;
     }
     
     protected override void Unsubscribe()
     {
         ItemFilter.onFilterChanged -= UpdateValue;
-        foreach (ItemType itemType in Key_Save.allItemTypes)
+        foreach (ItemType itemType in Key_Save.AllItemTypes)
             Saves.Int[Key_Save.item_amount(itemType)].onChanged -= UpdateValue;
     }
     
