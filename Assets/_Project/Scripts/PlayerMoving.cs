@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class PlayerMoving : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private Transform _body;
 
     private void OnEnable()
     {
@@ -20,7 +21,7 @@ public class PlayerMoving : MonoBehaviour
     {
         Vector3 direction3D = new Vector3(direction.x, 0f, direction.y);
         _navMeshAgent.velocity = direction3D * _navMeshAgent.speed;
-        _navMeshAgent.transform.forward = direction3D.normalized;
+        _body.forward = direction3D.normalized;
     }
 
 

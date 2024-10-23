@@ -8,14 +8,12 @@ public class TaskList_Info : Info
 
     protected override void Subscribe()
     {
-        for (int i = 0; i < Saves.maxTaskAmount; i++)
-            Saves.String[Key_Save.task_data(i)].onChanged += UpdateValue;
+        TaskManager.onTaskUpdated += UpdateValue;
     }
     
     protected override void Unsubscribe()
     {
-        for (int i = 0; i < Saves.maxTaskAmount; i++)
-            Saves.String[Key_Save.task_data(i)].onChanged -= UpdateValue;
+        TaskManager.onTaskUpdated -= UpdateValue;
     }
     
     protected override void UpdateValue()

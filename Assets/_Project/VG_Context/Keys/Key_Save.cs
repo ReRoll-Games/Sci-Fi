@@ -9,8 +9,6 @@ namespace VG
         public static string ads_enabled => "ads";
         public static string last_time => "lt";
 
-
-        public static string gears => "co";
         public static string technologies_data => "tech";
 
         public static string building_data(int index) => $"b{index}";

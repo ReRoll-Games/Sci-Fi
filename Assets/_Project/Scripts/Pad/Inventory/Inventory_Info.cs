@@ -36,7 +36,7 @@ public class Inventory_Info : Info
             ItemType itemType = filteredItemTypes[i];
             int itemAmount = Saves.Int[Key_Save.item_amount(itemType)].Value;
 
-            if (itemAmount > 0)
+            if (itemAmount > 0 && itemType != ItemType.GearCoins)
             {
                 Instantiate(_itemWidgetPrefab, _container).SetItems(new ItemPack
                 {

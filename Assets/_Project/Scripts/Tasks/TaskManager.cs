@@ -5,6 +5,8 @@ using VG;
 
 public class TaskManager : MonoBehaviour
 {
+    public static event Action onTaskUpdated;
+
     private static TaskManager _instance;
 
     [SerializeField] private TaskConfig _taskConfig;
@@ -14,6 +16,8 @@ public class TaskManager : MonoBehaviour
 
     private void Awake()
     {
+        if (!Startup.loaded) return;
+
         _instance = this;
         GenerateTaskList();
     }
@@ -30,7 +34,11 @@ public class TaskManager : MonoBehaviour
         }
 
         if (Saves.String[Key_Save.task_data(0)].Value == string.Empty)
+        {
+            print("Create while empty list");
             CreateTask(index: 0);
+        }
+            
     }
 
 
@@ -48,6 +56,7 @@ public class TaskManager : MonoBehaviour
         }
 
         task.Subscribe();
+        task.onUpdated += () => onTaskUpdated?.Invoke();
         CurrentTasks.Add(task);
     }
 
@@ -64,16 +73,29 @@ public class TaskManager : MonoBehaviour
                 if (taskIndex > maxIndex) maxIndex = taskIndex;
             }
 
-        Saves.Int[Key_Save.gears].Value += task.Reward;
+        Saves.Int[Key_Save.item_amount(ItemType.GearCoins)].Value += task.Reward;
+
+        task.Unsubscribe();
         CurrentTasks.Remove(task);
         Saves.String[Key_Save.task_data(slot)].Value = string.Empty;
+
+        int nextIndex = maxIndex + 1;
+        _instance.CreateTask(nextIndex);
+
+        bool secondTaskAvailable = nextIndex >= _instance._taskConfig.SecondTaskAvailableFromIndex;
+
+        if (secondTaskAvailable && 
+            Saves.String[Key_Save.task_data(1)].Value == string.Empty)
+            _instance.CreateTask(nextIndex + 1);
+
+        bool thirdTaskAvailable = nextIndex >= _instance._taskConfig.ThirdTaskAvailableFromIndex;
+        if (thirdTaskAvailable &&
+            Saves.String[Key_Save.task_data(2)].Value == string.Empty)
+            _instance.CreateTask(nextIndex + 1);
         
 
-        _instance.CreateTask(maxIndex + 1);
 
-        if (maxIndex + 1 == _instance._taskConfig.SecondTaskAvailableFromIndex 
-            || maxIndex + 1 == _instance._taskConfig.ThirdTaskAvailableFromIndex)
-            _instance.CreateTask(maxIndex + 2);
+        onTaskUpdated?.Invoke();
     }
 
 

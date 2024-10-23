@@ -58,7 +58,7 @@ public class Pick : MonoBehaviour
 
     private void StartUsing(OreSource oreSource)
     {
-        _body.animator.SetBool("LazerCutter", true);
+        //_body.animator.SetBool("LazerCutter", true);
         _targetOreSource = oreSource;
         _extractTimeLeft = _extractTime;
     }
@@ -82,7 +82,7 @@ public class Pick : MonoBehaviour
 
     private void StopUsing()
     {
-        _body.animator.SetBool("LazerCutter", false);
+        //_body.animator.SetBool("LazerCutter", false);
         _targetOreSource = null;
         _body.transform.localRotation = Quaternion.identity;
     }

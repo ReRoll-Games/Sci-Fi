@@ -21,10 +21,13 @@ namespace VG
             new ItemBool(Key_Save.ads_enabled, true);
             new ItemString(Key_Save.last_time, DateTime.Now.ToString());
 
-            new ItemInt(Key_Save.gears, 500);
-
             foreach (ItemType itemType in Key_Save.AllItemTypes)
-                new ItemInt(Key_Save.item_amount(itemType), 5);
+            {
+                int amount = 5;
+                if (itemType == ItemType.GearCoins) amount = 500;
+                new ItemInt(Key_Save.item_amount(itemType), amount);
+            }
+                
 
 
 

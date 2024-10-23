@@ -2,6 +2,7 @@ using System;
 
 public abstract class Task
 {
+    public Action onUpdated;
 
     public int Index { get; protected set; }
     public int Reward { get; protected set; }

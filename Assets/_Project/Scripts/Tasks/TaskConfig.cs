@@ -14,5 +14,6 @@ public class TaskConfig : ScriptableObject
 
     public TaskData GetTaskData(int index) => _taskData[index];
 
-
 }
+
+

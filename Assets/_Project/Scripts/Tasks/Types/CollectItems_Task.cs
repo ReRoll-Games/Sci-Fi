@@ -20,16 +20,15 @@ public class CollectItems_Task : Task
         MaxPoints = int.Parse(splitData[0]);
 
         int slot = Saves.GetTaskSlotByIndex(index);
-        string saveData = Saves.String[Key_Save.task_data(slot)].Value;
 
-        if (saveData != string.Empty)
-            CurrentPoints = Saves.GetTaskPoints(slot);
+        bool firstCreate = Saves.String[Key_Save.task_data(slot)].Value == string.Empty;
 
-        else
+        if (firstCreate)
         {
             CurrentPoints = 0;
             Saves.String[Key_Save.task_data(slot)].Value = ToSaveString();
         }
+        else CurrentPoints = Mathf.Min(Saves.GetTaskPoints(slot), MaxPoints);
     }
 
 
@@ -52,6 +51,7 @@ public class CollectItems_Task : Task
 
         int slot = Saves.GetTaskSlotByIndex(Index);
         Saves.String[Key_Save.task_data(slot)].Value = ToSaveString();
+        onUpdated?.Invoke();
     }
 
     

@@ -41,7 +41,7 @@ public class BuildMode : MonoBehaviour
 
     private bool AvailableForBuilding(Vector2Int gridPosition)
     {
-        if (_currentBuildingType == BuildingType.Drill)
+        if (_currentBuildingType == BuildingType.Miner)
             return PlaceCreator.MiningPositions.Contains(gridPosition);
 
         return PlaceCreator.BasementPositions.Contains(gridPosition);
@@ -73,7 +73,7 @@ public class BuildMode : MonoBehaviour
 
         int price = GameResources.GetBuildingConfig(buildingType).GetCurrentPrice();
 
-        Saves.Int[Key_Save.gears].Value -= price;
+        Saves.Int[Key_Save.item_amount(ItemType.GearCoins)].Value -= price;
 
         Saves.SetBuildingData(buildingData);
         BuildingCreator.InstantiateBuilding(buildingData);

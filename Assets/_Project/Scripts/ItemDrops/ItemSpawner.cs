@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private DroppedItem _itemPrefab;
+    [SerializeField] private ItemDrop _itemPrefab;
     [SerializeField] private Vector2 _spawnAreaSize;
     [SerializeField] private float _spawnCooldown;
     [SerializeField] private int _maxAmount;
