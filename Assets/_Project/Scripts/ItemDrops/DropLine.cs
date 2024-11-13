@@ -37,7 +37,7 @@ public class DropLine : MonoBehaviour
 
     private void OnDrop()
     {
-        var itemDrop = GameResources.GetItemConfig(_itemPack.itemType).ItemDropPrefab;
+        var itemDrop = Configs.GetItem(_itemPack.itemType).ItemDropPrefab;
 
         var spawnPosition = transform.position;
         spawnPosition.y = 0f;

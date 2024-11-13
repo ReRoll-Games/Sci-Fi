@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: Furnace_1
   m_EditorClassIdentifier: 
   <RequiredItems>k__BackingField:
-  - itemType: 0
+  - itemType: 3
     amount: 8
-  - itemType: 1
-    amount: 3
   <IconSprite>k__BackingField: {fileID: 21300000, guid: 09a3bc0b38b33d842a686271e3b60790,
     type: 3}
   _title: "\u041F\u043B\u0430\u0432\u0438\u043B\u044C\u043D\u044F"

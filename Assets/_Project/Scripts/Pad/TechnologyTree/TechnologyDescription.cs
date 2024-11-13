@@ -27,7 +27,7 @@ public class TechnologyDescription : MonoBehaviour
         TechnologyType = technologyType;
         Level = level;
 
-        var technologyConfig = GameResources.GetTecnhologyConfig(technologyType, level);
+        var technologyConfig = Configs.GetTecnhologyConfig(technologyType, level);
 
         _instance._panel.SetActive(true);
         _instance._icon.sprite = technologyConfig.IconSprite;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using VG;
@@ -13,6 +14,8 @@ public class BuildMode : MonoBehaviour
     private bool _modeEnabled = false;
     private BuildModeUnit _currentBuildModeUnit;
     private BuildingType _currentBuildingType;
+
+    private List<Vector2Int> _freeBasementPositions;
 
 
     private void Awake()
@@ -40,46 +43,51 @@ public class BuildMode : MonoBehaviour
     }
 
     private bool AvailableForBuilding(Vector2Int gridPosition)
-    {
-        if (_currentBuildingType == BuildingType.Miner)
-            return PlaceCreator.MiningPositions.Contains(gridPosition);
+        => _freeBasementPositions.Contains(gridPosition);
 
-        return PlaceCreator.BasementPositions.Contains(gridPosition);
-    }
 
 
     public static void Enable(BuildingType buildingType)
     {
         instance._currentBuildingType = buildingType;
-        var buildModePrefab = GameResources.GetBuildModePrefab(buildingType);
+        var buildModePrefab = Configs.GetBuildModePrefab(buildingType);
         Vector3 position = instance.GetGridCenterPosition(instance._playerTransform.position);
         instance._currentBuildModeUnit = Instantiate(buildModePrefab, position, Quaternion.identity);
         instance._modeEnabled = true;
+
+        instance._freeBasementPositions = Configs.GetPlaces().BasementPositions;
     }
 
     public static void ApplyBuild()
     {
-        int buildingIndex = Saves.GetBuildingQuantity() - 1;
         var buildingType = instance._currentBuildingType;
         var gridPosition = instance._grid.WorldToCell(instance._currentBuildModeUnit.transform.position);
+
+        BuildNew(buildingType, new Vector2Int(gridPosition.x, gridPosition.y));
+
+        
+        int price = Configs.GetBuildingConfig(buildingType).GetCurrentPrice();
+        Saves.Int[Key_Save.item_amount(ItemType.GearCoins)].Value -= price;
+
+        Disable();
+    }
+
+    public static void BuildNew(BuildingType buildingType, Vector2Int gridPosition)
+    {
+        int buildingIndex = Saves.GetBuildingQuantity() - 1;
 
         var buildingData = new BuildingData
         {
             buildingType = buildingType,
             index = buildingIndex,
             level = 1,
-            gridPosition = new Vector2Int(gridPosition.x, gridPosition.y),
+            gridPosition = gridPosition,
         };
-
-        int price = GameResources.GetBuildingConfig(buildingType).GetCurrentPrice();
-
-        Saves.Int[Key_Save.item_amount(ItemType.GearCoins)].Value -= price;
 
         Saves.SetBuildingData(buildingData);
         BuildingCreator.InstantiateBuilding(buildingData);
-
-        Disable();
     }
+
 
 
     public static void Disable()

@@ -1,39 +1,27 @@
-using System.Collections.Generic;
-
-
 namespace VG
 {
     public partial class Saves
     {
 
-        public static List<ItemPackFloat> GetMinedItems(int buildingIndex)
+        public static int GetMinerLevel(int index)
+            => int.Parse(String[Key_Save.miner_data(index)].Value.Split('_')[0]);
+
+
+        public static void SetMinerLevel(int index, int level)
         {
-            var items = new List<ItemPackFloat>();
-
-            var buildingData = GetBuildingData(buildingIndex);
-            var miningData = GameResources.MiningPositionsConfig
-                .GetMiningPositionData(buildingData.gridPosition);
-
-            string[] splitData = String[Key_Save.building_process_data(buildingIndex)].Value.Split('_');
-
-            for (int i = 0; i < miningData.miningProportions.Count; i++)
-                items.Add(new ItemPackFloat
-                {
-                    itemType = miningData.miningProportions[i].itemType,
-                    amount = float.Parse(splitData[i]),
-                });
-
-            return items;
+            string[] splitData = String[Key_Save.miner_data(index)].Value.Split('_');
+            String[Key_Save.miner_data(index)].Value = $"{level}_{splitData[1]}";
         }
 
-        public static void SetMinedItems(List<ItemPackFloat> items, int buildingIndex)
-        {
-            string data = string.Empty;
-            for (int i = 0; i < items.Count; i++)
-                data += $"{items[i].amount}_";
+        public static float GetMinedItems(int index)
+            => float.Parse(String[Key_Save.miner_data(index)].Value.Split('_')[1]);
 
-            String[Key_Save.building_process_data(buildingIndex)].Value = data;
+        public static void SetMinedItems(int index, float amount)
+        {
+            string[] splitData = String[Key_Save.miner_data(index)].Value.Split('_');
+            String[Key_Save.miner_data(index)].Value = $"{splitData[0]}_{amount}";
         }
+
 
 
 

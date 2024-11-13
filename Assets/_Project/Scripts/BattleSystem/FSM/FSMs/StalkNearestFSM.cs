@@ -12,7 +12,6 @@ public class StalkNearestFSM : FSM
         if (StalkableUnit == null)
             StalkableUnit = FindStalkableUnit();
 
-        print(StalkableUnit);
         if (StalkableUnit == null) { SetState(State.Idle); return; }
 
 
@@ -40,12 +39,10 @@ public class StalkNearestFSM : FSM
 
     private Unit FindStalkableUnit()
     {
-        print("find");
         foreach (var unit in Unit.all)
             if (unit.Team.TeamType == _unit.Team.RivalTeam)
                 return unit;
 
-        print("null");
         return null;
     }
 

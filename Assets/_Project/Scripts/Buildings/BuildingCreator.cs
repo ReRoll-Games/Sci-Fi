@@ -6,8 +6,6 @@ public class BuildingCreator : MonoBehaviour
 {
     private static BuildingCreator instance;
 
-    public static List<Vector2Int> buildingPositions { get; private set; }
-
 
     [SerializeField] private Grid _grid;
     private List<Building> _buildings;
@@ -18,7 +16,6 @@ public class BuildingCreator : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        buildingPositions = new List<Vector2Int>();
         GameEvents.onBuildingUpgrade += OnBuildingUpgrade;
     }
 
@@ -56,14 +53,17 @@ public class BuildingCreator : MonoBehaviour
 
     public static Building InstantiateBuilding(BuildingData buildingData)
     {
-        Building buildingPrefab =
-                GameResources.GetBuildingPrefab(buildingData.buildingType, buildingData.level);
+        var config = Configs.GetBuildingConfig(buildingData.buildingType);
+
+        GameObject buildingPrefab = buildingData.level > 0 ? config.ActivePrefab : config.DestroyedPrefab;
 
         Vector3 position = instance._grid.GetCellCenterLocal(buildingData.gridPosition3D);
         position.y = offsetY;
-        var buildingInstance = Instantiate(buildingPrefab, position, Quaternion.identity);
+
+        var buildingInstance = Instantiate(buildingPrefab, position, Quaternion.identity)
+            .GetComponent<Building>();
+
         buildingInstance.SetIndex(buildingData.index);
-        buildingPositions.Add(new Vector2Int(buildingData.gridPosition.x, buildingData.gridPosition.y));
 
         if (buildingData.index < instance._buildings.Count)
             instance._buildings[buildingData.index] = buildingInstance;

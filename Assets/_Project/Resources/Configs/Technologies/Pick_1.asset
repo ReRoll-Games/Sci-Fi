@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Pick_1
   m_EditorClassIdentifier: 
   <RequiredItems>k__BackingField:
-  - itemType: 2
-    amount: 10
+  - itemType: 3
+    amount: 15
   <IconSprite>k__BackingField: {fileID: 21300000, guid: abd01b85980627948b6ba95cbe9ee0a7,
     type: 3}
   _title: "\u041B\u0430\u0437\u0435\u0440\u043D\u044B\u0439 \u0440\u0435\u0437\u0430\u043A"

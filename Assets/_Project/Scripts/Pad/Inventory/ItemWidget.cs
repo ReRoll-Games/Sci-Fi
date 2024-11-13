@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using VG;
 
 public class ItemWidget : MonoBehaviour
 {
@@ -12,9 +10,9 @@ public class ItemWidget : MonoBehaviour
 
     public void SetItems(ItemPack itemPack)
     {
-        _nameText.text = itemPack.itemType.ToString(); //Localization.GetString(Key_Phrase.item(itemPack.itemType));
+        _nameText.text = itemPack.itemType.ToString();
         _amountText.text = itemPack.amount.ToString();
-        _iconImage.sprite = GameResources.GetItemSprite(itemPack.itemType);
+        _iconImage.sprite = Configs.GetItem(itemPack.itemType).IconSprite;
     }
 
 

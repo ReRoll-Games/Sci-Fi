@@ -21,7 +21,7 @@ public class BuildingCatalog_Info : Info
     protected override void UpdateValue()
     {
         _furnace.SetActive(Saves.GetTechnologyLevel(TechnologyType.Furnace) >= 1);
-        _drill.SetActive(Saves.GetTechnologyLevel(TechnologyType.Drill) >= 1);
+        _drill.SetActive(Saves.GetTechnologyLevel(TechnologyType.Miner) >= 1);
 
     }
     

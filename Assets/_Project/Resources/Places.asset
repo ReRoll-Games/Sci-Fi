@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9ac0c9560464994422ccb2333cec, type: 3}
+  m_Name: Places
+  m_EditorClassIdentifier: 
+  <BasementPrefab>k__BackingField: {fileID: 4655666559512859221, guid: f5e460ad35c7ccd49a4e165eb1af7153,
+    type: 3}
+  _basementPositions:
+  - gridPosition: {x: 1, y: 1}
+    availableFromLevel: 0
+  - gridPosition: {x: 0, y: 1}
+    availableFromLevel: 1
+  - gridPosition: {x: 1, y: 0}
+    availableFromLevel: 1
+  - gridPosition: {x: 1, y: 2}
+    availableFromLevel: 1
+  _itemSources:
+  - itemType: 0
+    sourcePrefab: {fileID: 7128848294195983727, guid: 27f83d9fff3b4d2438412b139da5f538,
+      type: 3}
+  - itemType: 1
+    sourcePrefab: {fileID: 9221747670887337879, guid: a62dee77c56bfc74799113d59832da9e,
+      type: 3}
+  _itemSourcePositions:
+  - gridPosition: {x: 0, y: 0}
+    itemType: 0
+    availableFromLevel: 0
+  - gridPosition: {x: -1, y: 0}
+    itemType: 0
+    availableFromLevel: 0

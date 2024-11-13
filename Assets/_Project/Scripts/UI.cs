@@ -17,7 +17,7 @@ public class UI : MonoBehaviour
 
     public static void OpenPanel(PadPageType panelType)
     {
-        openedPanels.Add(panelType, Instantiate(GameResources.GetPanel(panelType), main));
+        openedPanels.Add(panelType, Instantiate(Configs.GetPanel(panelType), main));
     }
 
     public static void ClosePanel(PadPageType panelType)

@@ -8,7 +8,7 @@ public class BuyTechnology_Button : ButtonHandler
         TechnologyType technologyType = TechnologyDescription.TechnologyType;
         int level = TechnologyDescription.Level;
 
-        var tecnhologyConfig = GameResources.GetTecnhologyConfig(technologyType, level);
+        var tecnhologyConfig = Configs.GetTecnhologyConfig(technologyType, level);
         var requiredItems = tecnhologyConfig.RequiredItems;
 
         bool buyAvailable = true;

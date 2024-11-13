@@ -14,6 +14,6 @@ public class LockedRecipeWidget : MonoBehaviour
         _nameText.text = recipe.Name;
         _requireText.text = $"Необходима плавильня\n{recipe.index + 1} уровня";
 
-        _outputItemImage.sprite = GameResources.GetItemSprite(recipe.outputItem);
+        _outputItemImage.sprite = Configs.GetItem(recipe.outputItem).IconSprite;
     }
 }

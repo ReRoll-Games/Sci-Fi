@@ -5,19 +5,16 @@ using VG;
 public class PlaceCreator : MonoBehaviour
 {
     [SerializeField] private Grid _grid;
-    [Header("Basement")]
-    [SerializeField] private GameObject _basementPrefab;
-    [SerializeField] private BasementConfig _basementConfig;
 
+    private PlacesConfig _config;
 
-    public static List<Vector2Int> BasementPositions { get; private set; }
-    public static List<Vector2Int> MiningPositions { get; private set; }
+    private static List<Vector2Int> _basementPositions = new List<Vector2Int>();
+    private static Dictionary<Vector2Int, ItemType> _itemSourcePositions = new Dictionary<Vector2Int, ItemType>();
 
 
     private void Awake()
     {
-        BasementPositions = new List<Vector2Int>();
-        MiningPositions = new List<Vector2Int>();
+        _config = Configs.GetPlaces();
         Saves.String[Key_Save.technologies_data].onChanged += UpdatePlaces;
     }
 
@@ -33,46 +30,44 @@ public class PlaceCreator : MonoBehaviour
     private void UpdatePlaces()
     {
         UpdateBasement();
-        UpdateMiningPositions();
+        UpdateItemSourcePositions();
     }
+
+
+    private void UpdateItemSourcePositions()
+    {
+        foreach (var itemSourcePosition in _config.ItemSourcePositions)
+        {
+            if (_itemSourcePositions.ContainsKey(itemSourcePosition.Key) == false)
+            {
+                Vector3 position = _grid.GetCellCenterLocal
+                    (new Vector3Int(itemSourcePosition.Key.x, itemSourcePosition.Key.y, 0));
+
+                var prefab = _config.GetItemSourcePrefab(itemSourcePosition.Value);
+
+                Instantiate(prefab, position, Quaternion.Euler(0f, 30f, 0f));
+                _itemSourcePositions.Add(itemSourcePosition.Key, itemSourcePosition.Value);
+            }
+        }
+    }
+
 
 
     private void UpdateBasement()
     {
-        int basementLevel = Saves.GetTechnologyLevel(TechnologyType.Basement);
-
-        foreach (var basementPosition in _basementConfig.GetBasementPositions(basementLevel))
+        foreach (var basementPosition in _config.BasementPositions)
         {
-            if (BasementPositions.Contains(basementPosition) == false)
+            if (_basementPositions.Contains(basementPosition) == false)
             {
                 Vector3 position = _grid.GetCellCenterLocal
                     (new Vector3Int(basementPosition.x, basementPosition.y, 0));
-                Instantiate(_basementPrefab, position, Quaternion.Euler(0f, 30f, 0f));
-                BasementPositions.Add(basementPosition);
+                Instantiate(_config.BasementPrefab, position, Quaternion.Euler(0f, 30f, 0f));
+                _basementPositions.Add(basementPosition);
             }
         }
     }
 
 
-    private void UpdateMiningPositions()
-    {
-        int miningPositionsLevel = Saves.GetTechnologyLevel(TechnologyType.Location);
-
-        foreach (var miningPosition in GameResources.MiningPositionsConfig
-            .GetMiningPositions(miningPositionsLevel))
-        {
-            if (MiningPositions.Contains(miningPosition.gridPosition) == false)
-            {
-                var gridPosition = miningPosition.gridPosition;
-
-                Vector3 position = _grid.GetCellCenterLocal
-                    (new Vector3Int(gridPosition.x, gridPosition.y, 0));
-
-                Instantiate(miningPosition.prefab, position, Quaternion.Euler(0f, 30f, 0f));
-                MiningPositions.Add(gridPosition);
-            }
-        }
-    }
 
 
 

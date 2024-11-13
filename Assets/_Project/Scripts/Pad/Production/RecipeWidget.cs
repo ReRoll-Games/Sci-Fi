@@ -33,7 +33,7 @@ public class RecipeWidget : MonoBehaviour
         for (int i = recipe.inputItems.Count; i < _inputItemIcons.Count; i++)
             _inputItemIcons[i].gameObject.SetActive(false);
 
-        _outputItemImage.sprite = GameResources.GetItemSprite(recipe.outputItem);
+        _outputItemImage.sprite = Configs.GetItem(recipe.outputItem).IconSprite;
     }
 
 

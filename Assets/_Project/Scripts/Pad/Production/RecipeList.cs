@@ -10,7 +10,7 @@ public class RecipeList : MonoBehaviour
 
     private void Start()
     {
-        var recipeConfig = GameResources.GetRecipesConfig(Building.Current.BuildingType);
+        var recipeConfig = Configs.GetRecipesConfig(Building.Current.BuildingType);
         int buildingLevel = Saves.GetBuildingData(Building.Current.Index).level;
 
         for (int i = 0; i < buildingLevel; i++)

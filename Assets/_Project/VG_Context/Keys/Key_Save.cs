@@ -19,6 +19,8 @@ namespace VG
 
         public static string task_data(int slot) => $"t{slot}";
 
+        public static string miner_data(int index) => $"m{index}";
+
 
         private static List<ItemType> _allItemTypes;
         public static List<ItemType> AllItemTypes

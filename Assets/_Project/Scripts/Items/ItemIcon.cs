@@ -14,7 +14,7 @@ public class ItemIcon : MonoBehaviour
 
     public void SetItemType(ItemType itemType)
     {
-        _iconImage.sprite = GameResources.GetItemSprite(itemType);
+        _iconImage.sprite = Configs.GetItem(itemType).IconSprite;
     }
 
     public void SetAmount(int amount) => _quantityText.text = amount.ToString();
@@ -31,7 +31,7 @@ public class ItemIcon : MonoBehaviour
 
     public void SetItemPack(ItemPack itemPack)
     {
-        _iconImage.sprite = GameResources.GetItemSprite(itemPack.itemType);
+        _iconImage.sprite = Configs.GetItem(itemPack.itemType).IconSprite;
         _quantityText.text = itemPack.amount.ToString();
     }
 

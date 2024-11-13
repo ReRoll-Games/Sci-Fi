@@ -7,6 +7,12 @@ using VG;
 public class BuildingConfig : ScriptableObject
 {
     [SerializeField] private BuildingType _buildingType;
+
+    [field: SerializeField] public GameObject DestroyedPrefab { get; private set; }
+    [field: SerializeField] public GameObject BuildModePrefab { get; private set; }
+    [field: SerializeField] public GameObject ActivePrefab { get; private set; }
+
+
     [SerializeField] private List<int> _prices;
 
     public int GetCurrentPrice()
@@ -18,7 +24,7 @@ public class BuildingConfig : ScriptableObject
 }
 
 
-public static partial class GameResources
+public static partial class Configs
 {
     public static BuildingConfig GetBuildingConfig(BuildingType buildingType) =>
         Resources.Load<BuildingConfig>($"Configs/Buildings/{buildingType}");

@@ -34,10 +34,8 @@ public class TaskManager : MonoBehaviour
         }
 
         if (Saves.String[Key_Save.task_data(0)].Value == string.Empty)
-        {
-            print("Create while empty list");
             CreateTask(index: 0);
-        }
+
             
     }
 

@@ -4,7 +4,7 @@ public class Repair_ItemInput : ItemInputButton
 {
     public override void OnItemInput(ItemPack itemPack)
     {
-        var repairConfig = GameResources.GetRepairConfig(Building.Current.BuildingType);
+        var repairConfig = Configs.GetRepairConfig(Building.Current.BuildingType);
         int itemIndex = 0;
         for (int i = 0; i < repairConfig.ItemRequires.Count; i++)
             if (itemPack.itemType == repairConfig.ItemRequires[i].itemType)

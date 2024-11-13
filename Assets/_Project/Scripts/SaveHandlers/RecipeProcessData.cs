@@ -64,7 +64,7 @@ namespace VG
         {
             BuildingType buildingType = GetBuildingData(buildingIndex).buildingType;
             int recipeIndex = GetProduction(buildingIndex).recipeIndex;
-            return GameResources.GetRecipesConfig(buildingType).GetRecipe(recipeIndex);
+            return Configs.GetRecipesConfig(buildingType).GetRecipe(recipeIndex);
         }
 
     }

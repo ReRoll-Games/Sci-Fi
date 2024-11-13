@@ -13,7 +13,7 @@ public class RepairConfig : ScriptableObject
 }
 
 
-public static partial class GameResources
+public static partial class Configs
 {
     public static RepairConfig GetRepairConfig(BuildingType buildingType)
         => Resources.Load<RepairConfig>($"Configs/Repairs/{buildingType}");

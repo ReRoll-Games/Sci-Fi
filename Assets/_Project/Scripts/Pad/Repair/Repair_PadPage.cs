@@ -25,7 +25,7 @@ public class Repair_PadPage : Info
 
     protected override void UpdateValue()
     {
-        var repairConfig = GameResources.GetRepairConfig(Building.Current.BuildingType);
+        var repairConfig = Configs.GetRepairConfig(Building.Current.BuildingType);
 
         _nameText.text = repairConfig.Name;
         _descriptionText.text = repairConfig.Description;

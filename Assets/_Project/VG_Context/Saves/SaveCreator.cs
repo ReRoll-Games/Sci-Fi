@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using static VG.Saves;
 
 
@@ -8,6 +7,7 @@ namespace VG
     public partial class Saves
     {
         public const int maxBuildingsAmount = 10;
+        public const int maxMinersAmount = 10;
     }
 
 
@@ -23,7 +23,7 @@ namespace VG
 
             foreach (ItemType itemType in Key_Save.AllItemTypes)
             {
-                int amount = 5;
+                int amount = 50;
                 if (itemType == ItemType.GearCoins) amount = 500;
                 new ItemInt(Key_Save.item_amount(itemType), amount);
             }
@@ -58,6 +58,10 @@ namespace VG
 
             for (int i = 0; i < maxTaskAmount; i++)
                 new ItemString(Key_Save.task_data(i), string.Empty);
+
+            for (int i = 0; i < maxMinersAmount; i++)
+                new ItemString(Key_Save.miner_data(i), "0_0");
+
 
             new ItemString(Key_Save.technologies_data, "Center_1");
 

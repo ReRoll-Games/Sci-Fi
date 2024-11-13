@@ -16,7 +16,7 @@ public class BuildingWidget : MonoBehaviour
 
         int buildingAmount = Saves.GetBuildingAmount(BuildingType);
 
-        int price = GameResources.GetBuildingConfig(BuildingType).GetCurrentPrice();
+        int price = Configs.GetBuildingConfig(BuildingType).GetCurrentPrice();
 
         _buildPrice.text = $"${price}";
     }
